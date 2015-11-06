@@ -1,0 +1,41 @@
+<div class="topbar">
+  <div class="title">上海中心气象台2015-10-26发布</div>
+  <div class="weather-logo">
+    <%= image_tag("svg/sun.svg")%>
+    <h3>晴转多云</h3>
+  </div>
+  <div class="weather-info">
+    <ul>
+      <li>
+        <%= image_tag("svg/wendu.svg")%>
+        <span>18℃~26℃</span></li>
+      <li>
+       <%= image_tag("svg/position.svg")%>
+       <span>上海</span>
+      </li>
+      <li>
+        <%= image_tag("svg/position.svg")%>
+        <span>120</span>
+        <span>良好</span>
+      </li>
+      <li>
+        <%= image_tag("svg/wind.svg")%>
+        <span>东南风3~4级</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="weather-list">
+  <ul>
+    <% 4.times do %>
+      <!-- 此处背景要使用奇偶变色 -->
+      <li>
+        <p>10-27</p>
+        <p>星期一</p>
+        <%= image_tag("svg/cloud.svg")%>
+        <p>阴有小雨</p>
+        <p>18℃~26℃</p>
+      </li>
+    <% end %>
+  </ul>
+</div>

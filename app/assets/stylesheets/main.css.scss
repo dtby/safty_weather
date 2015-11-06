@@ -1,15 +1,38 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
 @import "variable";
 
 //全局
+html {
+  font-size: 62.5%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-size: 1.4rem;
+  font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+}
+
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+ul, li {
+  list-style: none;
+}
 a:link, a:hover, a:visited, a:active {
   text-decoration: none;
 }
 
 footer {
-  padding: 10px 0 0 0;
-  background: $footer-color;
+  padding: 5px 0;
+  background: $footer-bg-color;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   overflow: hidden;
   //默认状态
   a {
@@ -19,7 +42,7 @@ footer {
     display: block;
     font-size: 12px;
     p {
-      color: #0a0a0a;
+      color: $footer-text-color;
     }
     .icon {
       height: 30px;
@@ -42,7 +65,7 @@ footer {
     //激活状态
     &.active {
       p {
-        color: #ec6e3e;
+        color: $footer-text-active-color;
       }
       .icon {
         &.home {

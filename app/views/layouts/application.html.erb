@@ -7,10 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
   <%= csrf_meta_tags %>
 </head>
-<body>
-<%= render "header"%>
-<%= yield %>
-<%= yield :scripts %>
-<%= render "footer"%>
+<body class="<%= controller.controller_path.gsub('/','_') + '_' + controller.action_name %>">
+  <%= render "header"%>
+  <%= yield %>
+  <%= yield :scripts %>
+  <%= render "footer"%>
 </body>
 </html>
