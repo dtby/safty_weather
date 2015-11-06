@@ -1,0 +1,10 @@
+<% content_for :scripts do %>
+  <%= javascript_include_tag 'http://api.map.baidu.com/api?v=2.0&ak=O6okGKLvjxliCNTCnsPCWlOp', 'data-turbolinks-track' => true %>
+<% end %>
+
+<div class="searchbar">
+  <form action="">
+    <input type="text" placeholder="请输入您要查询的地址">
+    <input type="submit" value="搜索" class="submit">
+  </form>
+</div>

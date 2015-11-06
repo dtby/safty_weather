@@ -1,0 +1,32 @@
+@import "variable";
+
+.scenes_index {
+  .searchbar {
+    padding: 10px 3%;
+    background: $home-topbar-color;
+    form {
+      position: relative;
+    }
+    input[type="text"] {
+      width: 94%;
+      height: 30px;
+      font-size: 1.4rem;
+      padding: 5px 0 5px 5px;
+      margin: 0 auto;
+      display: block;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      color: #ef402b;
+      position: absolute;
+      right: 3%;
+      top: 4px;
+      border: none;
+      height: 36px;
+      width: 50px;
+      background: #cdcdcd;
+      display: block;
+      border-radius: 5px;
+    }
+  }
+}
