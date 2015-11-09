@@ -26,6 +26,14 @@ a:link, a:hover, a:visited, a:active {
   text-decoration: none;
 }
 
+.fright {
+  float: right;
+}
+
+.fleft {
+  float: left;
+}
+
 footer {
   padding: 5px 0;
   background: $footer-bg-color;
