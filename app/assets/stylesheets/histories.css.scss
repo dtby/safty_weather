@@ -1,0 +1,99 @@
+@import "variable";
+
+.histories_list {
+  background: $main-color;
+  .title {
+    margin: 10px 0;
+    text-align: center;
+  }
+  .listBar {
+    padding: 0 5%;
+    a {
+      color: $black-color;
+    }
+    .list {
+      margin: 10px 0;
+      padding: 5px 10px;
+      background: $white-color;
+      overflow: hidden;
+      .leftBar {
+        width: 80%;
+        float: left;
+      }
+      .rightArrow {
+        width: 20%;
+        float: left;
+        text-align: right;
+        img {
+          margin: 4px 0;
+        }
+      }
+    }
+  }
+  p {
+    height: 30px;
+    line-height: 30px;
+  }
+}
+
+.histories_result {
+  padding: 0 10%;
+  background: $main-color;
+  .logo {
+    text-align: center;
+  }
+  ul {
+    overflow: hidden;
+    li {
+      line-height: 40px;
+      &::before {
+        margin-right: 15px;
+      }
+      &.star::before {
+        content: url("svg/xingxing.svg");
+      }
+      &.time::before {
+        content: url("svg/shizhong.svg");
+      }
+      &.position::before {
+        content: url("svg/dizhi.svg");
+      }
+      &.rain::before {
+        content: url("svg/yu.svg");
+      }
+      &.ok::before {
+        content: url("svg/duihao.svg");
+      }
+    }
+  }
+  hr {
+    margin: 30px 0;
+    background: $white-color;
+  }
+  .tips {
+    text-align: center;
+    color: $white-color;
+    font-size: 1.6rem;
+    line-height: 48px;
+  }
+}
+.histories_index {
+  .searchBar {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 100px;
+    border-radius: 5px;
+    .title {
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      color: $white-color;
+      background: $main-color;
+    }
+    select {
+      width: 100%!important;
+      height: 48px!important;
+    }
+  }
+}
