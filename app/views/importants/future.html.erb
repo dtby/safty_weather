@@ -1,3 +1,7 @@
+<%= content_for :tabbar do %>
+  <%= render "tabbar"%>
+<% end %>
+
 <div class="searchbar">
   <form action="">
     <div id="r-result"><input type="text" placeholder="请输入您要查询的地址" id="suggestId"></div>
@@ -10,29 +14,23 @@
   <div id="allmap"></div>
 </div>
 
-<div id="r-result"></div>
-
 <div class="weather-info">
   <table>
     <tr>
-      <th>地址</th>
+      <th>位置</th>
       <td>虹桥机场</td>
     </tr>
     <tr>
-      <th>温度</th>
+      <th>日期</th>
       <td>18°C</td>
     </tr>
     <tr>
-      <th>气压</th>
+      <th>天气</th>
       <td>998hPa</td>
     </tr>
     <tr>
-      <th>风</th>
+      <th>降水量</th>
       <td>35/82</td>
-    </tr>
-    <tr>
-      <th>能见度</th>
-      <td>11892</td>
     </tr>
   </table>
 </div>

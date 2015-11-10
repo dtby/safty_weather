@@ -1,0 +1,13 @@
+<%= content_for :tabbar do %>
+  <div class="tabContent">
+    <%= link_to importants_path, class: "#{current_page?(controller: 'importants', action: 'index') ? 'active' : ''} br" do %>
+      预警信号
+    <% end %>
+    <%= link_to future_importants_path, class: "#{current_page?(controller: 'importants', action: 'future') ? 'active' : ''} br" do %>
+      未来降雨
+    <% end %>
+    <%= link_to routing_importants_path, class: "#{current_page?(controller: 'importants', action: 'routing') ? 'active' : ''}" do %>
+      台风路径
+    <% end %>
+  </div>
+<% end %>

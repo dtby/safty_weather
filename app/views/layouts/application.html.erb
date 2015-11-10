@@ -9,6 +9,7 @@
 </head>
 <body class="<%= controller.controller_path.gsub('/','_') + '_' + controller.action_name %>">
   <%= render "header"%>
+  <%= yield :tabbar %>
   <%= yield %>
   <%= yield :scripts %>
   <%= render "footer"%>

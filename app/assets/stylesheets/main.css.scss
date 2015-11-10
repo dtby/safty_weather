@@ -7,6 +7,7 @@ html {
 }
 body {
   font-size: 1.4rem;
+  margin-bottom: 60px!important;
   font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
 }
 
@@ -37,10 +38,11 @@ a:link, a:hover, a:visited, a:active {
 footer {
   padding: 5px 0;
   background: $footer-bg-color;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: inherit;
   overflow: hidden;
   //默认状态
   a {
