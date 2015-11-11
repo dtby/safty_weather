@@ -1,0 +1,15 @@
+defaults: &defaults
+  #baidukey: dev@example.com
+
+development:
+  <<: *defaults
+  baidukey: O6okGKLvjxliCNTCnsPCWlOp
+  #email: info@example.com
+
+test:
+  <<: *defaults
+  #email: test@example.com
+
+production:
+  <<: *defaults
+  baidukey: xLMcXDQIwqXwtsMNWBBwaQaP

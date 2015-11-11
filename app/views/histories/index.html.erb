@@ -31,7 +31,7 @@
 </div>
 
 <% content_for :scripts do %>
-  <%= javascript_include_tag 'http://api.map.baidu.com/api?v=2.0&ak=O6okGKLvjxliCNTCnsPCWlOp' %>
+  <%= javascript_include_tag baidu_api %>
   <script type="text/javascript">
     //初始化地图
     var map = new BMap.Map("allmap");
