@@ -1,40 +1,45 @@
 <div class="topbar">
-  <div class="title">上海中心气象台2015-10-26发布</div>
+  <div class="title">上海中心气象台<%= @now %>发布</div>
   <div class="weather-logo">
-    <%= image_tag("svg/sun.svg")%>
-    <h3>晴转多云</h3>
+    <%= image_tag Weather.get_weather_icons(@weather_info_first["weatherpic"])['pic'][0] %>
+    <h3><%= @weather_info_first["weather"] %></h3>
   </div>
   <div class="weather-info">
     <ul>
       <li>
         <%= image_tag("svg/wendu.svg")%>
-        <span>18℃~26℃</span></li>
+        <span><%= @weather_info_first["tempe"] %></span></li>
       <li>
        <%= image_tag("svg/position.svg")%>
        <span>上海</span>
       </li>
       <li>
-        <%= image_tag("svg/position.svg")%>
-        <span>120</span>
-        <span>良好</span>
+        <%= image_tag("aqi.png")%>
+        <span><%= @aqi_info['aqi']%></span>
+        <span><%= @aqi_info['level']%></span>
       </li>
       <li>
         <%= image_tag("svg/wind.svg")%>
-        <span>东南风3~4级</span>
+        <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
       </li>
     </ul>
   </div>
 </div>
+
 <div class="weather-list">
   <ul>
-    <% 4.times do %>
+    <% @weather_info.each_with_index do |weather, index|%>
       <!-- 此处背景要使用奇偶变色 -->
-      <li>
-        <p>10-27</p>
-        <p>星期一</p>
-        <%= image_tag("svg/cloud.svg")%>
-        <p>阴有小雨</p>
-        <p>18℃~26℃</p>
+      <% if index.odd? %>
+        <li>
+      <% else %>
+        <li class="bg">
+      <% end %>
+        <p><%= weather["datatime"] %></p>
+        <p><%= get_weekday weather["datatime"] %></p>
+        <%= image_tag(Weather.get_weather_icons(weather["weatherpic"])['pic'][0])%>
+        <p><%= weather["weather"] %></p>
+        <p><%= weather["tempe"] %></p>
       </li>
     <% end %>
   </ul>

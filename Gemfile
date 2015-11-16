@@ -48,3 +48,9 @@ group :development do
   gem 'spring'
 end
 
+#获取api数据
+gem 'faraday'
+gem 'multi_json'
+
+#中文分词
+gem 'rmmseg-cpp'

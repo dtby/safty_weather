@@ -31,7 +31,7 @@
 </div>
 
 <% content_for :scripts do %>
-  <%= javascript_include_tag baidu_api %>
+  <%= javascript_include_tag baidu_api(ENV['baidukey']) %>
   <script type="text/javascript">
     //初始化地图
     var map = new BMap.Map("allmap");

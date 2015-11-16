@@ -5,12 +5,12 @@
     padding: 3%;
     background: $home-topbar-color;
     .title {
-      color: #fff;
+      color: $white-color;
       text-align: center;
       margin: 5px 0;
     }
     .weather-logo {
-      color: #fff;
+      color: $white-color;
       text-align: center;
       margin: 30px 0;
       p {
@@ -18,7 +18,7 @@
       }
     }
     .weather-info {
-      color: #fff;
+      color: $white-color;
       ul {
         overflow: hidden;
         li {
@@ -30,7 +30,7 @@
     }
   }
   .weather-list {
-    color: #848484;
+    color: $text-color;
     ul {
       overflow: hidden;
       li {
@@ -38,8 +38,15 @@
         float: left;
         padding: 10px 0;
         text-align: center;
-        background: #ffefe7;
+        background: $white-color;
+        &.bg {
+          background: $li-color;
+        }
+        img {
+          width: 100%;
+        }
         p {
+          font-size: 12px;
           height: 24px;
           line-height: 24px;
         }
