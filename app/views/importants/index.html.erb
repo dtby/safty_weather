@@ -14,24 +14,20 @@
 
 <div class="mainContent">
   <div class="topBar">
-    <section>
-      <%= image_tag("baoyu.gif") %>
-      <p class="title">全市黄色暴雨预警</p>
-      <p>我市北部地区已出现50毫米以上降水，且将持续，预计今天白天到夜间，我是仍将出现局部超过50毫米的降水，请注意防范。</p>
-    </section>
-    <section>
-      <%= image_tag("taifeng.gif") %>
-      <p class="title">全市黄色暴雨预警</p>
-      <p>我市北部地区已出现50毫米以上降水，且将持续，预计今天白天到夜间，我是仍将出现局部超过50毫米的降水，请注意防范。</p>
-    </section>
-    <section>
-      <%= image_tag("dafeng.gif") %>
-      <p class="title">全市黄色暴雨预警</p>
-      <p>我市北部地区已出现50毫米以上降水，且将持续，预计今天白天到夜间，我是仍将出现局部超过50毫米的降水，请注意防范。</p>
-    </section>
+    <% if @warning_data.present? %>
+      <% @warning_data.each do |warning|%>
+        <section>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level'])) %>
+          <p><%= data['type'] %></p>
+          <p><%= data['content'] %></p>
+        </section>
+      <% end %>
+    <% else %>
+      <p class="alert text-center">全市暂时无预警信息</p>
+    <% end %>
   </div>
 
   <div class="mainMap">
-    <%= image_tag("shanghai.gif", usemap: "#planetmap") %>
+    <%= image_tag("shanghai.gif") %>
   </div>
 </div>

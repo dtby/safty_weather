@@ -1,5 +1,5 @@
 class ScenesController < ApplicationController
   def index
-    p ENV['baidukey']
+    @scene_weather = Weather.get_scene_data(params[:lon], params[:lat])
   end
 end

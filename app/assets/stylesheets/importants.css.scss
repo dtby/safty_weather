@@ -36,7 +36,11 @@
   .mainContent {
     padding: 0 2%;
     .topBar {
-      margin-top: 20px;
+      margin: 70px 0 20px 0;
+      p.alert {
+        font-size: 16px;
+        color: $white-color;
+      }
       .title {
         font-size: 14px;
         margin: 5px 0;

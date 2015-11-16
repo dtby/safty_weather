@@ -3,6 +3,8 @@ module Weather
   WEATHER_URL = "/api/v1/weather_forecasts/query?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy&city_name=上海"
   AQI_URL = "/api/v1/aqi?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   LOCAL_WEATHER_URL = '/api/v1/aqi?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy'
+  SCENE_URL = "/api/v1/weather_forecasts/locate?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
+  WARNING_URL = "/api/v1/warnings/city?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
 
   #天气数据
   def self.get_weather_data
@@ -12,6 +14,17 @@ module Weather
   #空气质量数据
   def self.get_aqi_data
     self.get_data_from_url(AQI_URL)
+  end
+
+  #实况查询
+  def self.get_scene_data lon,lat
+    url = SCENE_URL + "&lon=" + lon.to_s + "&lat=" + lat.to_s
+    self.get_data_from_url(url)
+  end
+
+  #预警信息获取
+  def self.get_warning_data
+    self.get_data_from_url(WARNING_URL)
   end
 
   #通过url获取数据
@@ -78,5 +91,37 @@ module Weather
     result["txt"] = txt
 
     return result
+  end
+
+  # 根据预警信息获取相关的预警图片
+  def self.get_image_pic(type, level)
+    image_pic = "b_"
+    warning_type = {
+      "台风" => "a",
+      "暴雨" => "b",
+      "高温" => "c",
+      "寒潮" => "d",
+      "大雾" => "e",
+      "雷电" => "f",
+      "大风" => "g",
+      "沙尘暴" => "h",
+      "冰雹" => "i",
+      "暴雪" => "j",
+      "道路结冰" => "k",
+      "干旱" => "l",
+      "霜冻" => "m",
+      "霾" => "n",
+      "臭氧" => "o"
+    }
+    warning_level = {
+      "蓝色" => 1,
+      "黄色" => 2,
+      "橙色" => 3,
+      "红色" => 4,
+      "解除" => 5
+    }
+    type = warning_type[type]
+    level = warning_level[level]
+    "b_#{type}#{level}.png"
   end
 end
