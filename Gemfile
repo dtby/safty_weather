@@ -54,3 +54,5 @@ gem 'multi_json'
 
 #中文分词
 gem 'rmmseg-cpp'
+
+gem 'gon', '~> 6.0'

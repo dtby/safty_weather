@@ -12,29 +12,18 @@
 
 <div id="r-result"></div>
 
+<%= link_to "#", scenes_path, id: "getWeatherData", remote: true, style: "display:none;", 'data-url': scenes_path %>
+
 <div class="weather-info">
   <table>
     <tr>
       <th>地址</th>
       <td id="address"></td>
     </tr>
-    <tr>
-      <th>温度</th>
-      <td>18°C</td>
-    </tr>
-    <tr>
-      <th>气压</th>
-      <td>998hPa</td>
-    </tr>
-    <tr>
-      <th>风</th>
-      <td>35/82</td>
-    </tr>
-    <tr>
-      <th>能见度</th>
-      <td>11892</td>
-    </tr>
   </table>
+  <div id="weather-info">
+    <%= render "weather_info"%>
+  </div>
 </div>
 <div id="result"></div>
 <% content_for :scripts do %>
@@ -42,7 +31,7 @@
   <script type="text/javascript">
     //初始化地图
     var map = new BMap.Map("allmap");
-    var point = new BMap.Point(124.487899,31.249162);
+    var point = new BMap.Point(124.487899, 31.249162);
     map.centerAndZoom(point, 11);  // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
 
@@ -58,78 +47,93 @@
         alert('failed'+this.getStatus());
       }
     },{enableHighAccuracy: true})
-    //var localUrl = window.location.href;  //获取当前url
-    $.getJSON(
-      "http://61.152.122.112:8080/api/v1/weather_forecasts/locate?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy&lon=110.487899&lat=31.249162", function(result) {
-        alert(result['data'])
-      }
-    )
+
+    var localUrl = window.location.href;  //获取当前url
     var gc = new BMap.Geocoder();
+
+    function setUrl(lng, lat) {
+      //将url置为原始url
+      var originHref = $("#getWeatherData").data('url');
+      $("#getWeatherData").attr('href', originHref);
+
+      //var href = $("#getWeatherData").attr('href') + "?lon=" + e.point.lng + "&lat=" + e.point.lat
+      var href = $("#getWeatherData").attr('href') + "?lon=" + lng + "&lat=" + lat
+      $("#getWeatherData").attr('href', href)
+    }
+
     function showInfo(e){
       var pt = e.point;
-      //window.location.href = localUrl + e.point.lng + e.point.lat;
+      setUrl(e.point.lng, e.point.lat);
       gc.getLocation(pt, function(rs){
         var addComp = rs.addressComponents;
-        map.clearOverlays();
-        map.addOverlay(new BMap.Marker(pt) )
+        map.clearOverlays();  //删除旧遮盖物
+        map.addOverlay(new BMap.Marker(pt))  //添加新的遮盖物
+        $("#getWeatherData").click();
         $("#address").text(addComp.province + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
       });
     }
     map.addEventListener("click", showInfo);
-    // //搜索地址
-    // function G(id) {
-    //   return document.getElementById(id);
-    // }
-    // var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-    //   {"input" : "suggestId",
-    //   "location" : map
-    // });
 
-    // ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
-    // var str = "";
-    //   var _value = e.fromitem.value;
-    //   var value = "";
-    //   if (e.fromitem.index > -1) {
-    //     value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-    //   }
-    //   str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
-    //   value = "";
-    //   if (e.toitem.index > -1) {
-    //     _value = e.toitem.value;
-    //     value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-    //   }
-    //   str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
-    //   G("searchResultPanel").innerHTML = str;
-    // });
 
-    // var myValue;
-    // ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
-    // var _value = e.item.value;
-    //   myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-    //   G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
-    //   setPlace();
-    // });
+    //搜索地址
+    function G(id) {
+      return document.getElementById(id);
+    }
+    var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+      {"input" : "suggestId",
+      "location" : map
+    });
 
-    // function setPlace(){
-    //   map.clearOverlays();    //清除地图上所有覆盖物
-    //   function myFun(){
-    //     var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-    //     alert(pp)
-    //     map.centerAndZoom(pp, 12);
-    //     map.addOverlay(new BMap.Marker(pp));    //添加标注
-    //   }
-    //   var local = new BMap.LocalSearch(map, { //智能搜索
-    //     onSearchComplete: myFun,
-    //     renderOptions: {map: map}
-    //   });
-    //   local.search(myValue);
-    // }
+    ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+    var str = "";
+      var _value = e.fromitem.value;
+      var value = "";
+      if (e.fromitem.index > -1) {
+        value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+      }
+      str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+      value = "";
+      if (e.toitem.index > -1) {
+        _value = e.toitem.value;
+        value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+      }
+      str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+      G("searchResultPanel").innerHTML = str;
+    });
+
+    var myValue;
+    ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+    var _value = e.item.value;
+      myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+      G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+      setPlace();
+    });
+
+    function setPlace(){
+      map.clearOverlays();    //清除地图上所有覆盖物
+      function myFun(){
+        var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+        map.centerAndZoom(pp, 12);
+        setUrl(pp.lng, pp.lat);
+        $("#getWeatherData").click();
+        map.addOverlay(new BMap.Marker(pp));    //添加标注
+        var inputVal = $("#suggestId").val();  //获取用户输入的值
+        $("#address").text(inputVal);
+      }
+      var local = new BMap.LocalSearch(map, { //智能搜索
+        onSearchComplete: myFun,
+        renderOptions: {map: map}
+      });
+      local.search(myValue);
+    }
+    //地图的高度等于屏幕的高度
+    var c_Height=$(document).height();
+    $(".mapbar").css("height",c_Height);
   </script>
 <% end %>
 
 <style type="text/css">
   .mapbar {
-    height: 500px;
     width: 100%;
   }
   #allmap {
