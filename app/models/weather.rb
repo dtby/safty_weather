@@ -5,7 +5,7 @@ module Weather
   LOCAL_WEATHER_URL = '/api/v1/aqi?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy'
   SCENE_URL = "/api/v1/weather_forecasts/locate?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   WARNING_URL = "/api/v1/warnings/city?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
-  AUTO_URL = "/api/v1/auto_stations/master?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
+  AUTO_URL = "/api/v1/auto_stations/locate_nation_wide?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
 
   #天气数据
   def self.get_weather_data
@@ -18,8 +18,9 @@ module Weather
   end
 
   #获取自动站数据
-  def self.get_city_data
-    self.get_data_from_url(AUTO_URL)
+  def self.get_city_data lon,lat
+    url = AUTO_URL + "&lon=" + lon.to_s + "&lat=" + lat.to_s
+    self.get_data_from_url(url)
   end
 
   #实况查询

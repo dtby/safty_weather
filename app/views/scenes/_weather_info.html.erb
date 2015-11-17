@@ -5,14 +5,14 @@
   </tr>
   <tr>
     <th>气压</th>
-    <td id="pressure">998hPa</td>
+    <td id="pressure"><%= @city_data['pressure']%></td>
   </tr>
   <tr>
     <th>风</th>
-    <td id="wind"><%= @scene_weather['direction']%><%= @scene_weather['speed']%></td>
+    <td id="wind"><%= @city_data['wind_direction']%></td>
   </tr>
   <tr>
     <th>能见度</th>
-    <td id="visibility"><%= @scene_weather['tempe']%></td>
+    <td id="visibility"><%= @city_data['visibility']%></td>
   </tr>
 </table>
