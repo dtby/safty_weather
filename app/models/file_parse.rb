@@ -7,7 +7,6 @@ class FileParse
       array = array + f.split(" ")
     end
     array
-    p array
   end
 
   def self.parse_position
@@ -25,10 +24,39 @@ class FileParse
   end
 
   def self.parse_all
+    #FileParse.parse_all
+    a = FileParse.parse_position
+    b = FileParse.parse_file
+
+    arr = [a, b].transpose.to_h
+    array = []
+    arr.each do |a1|
+      hash = {}
+      hash['count'] = a1[1].to_f
+      hash = a1[0].merge(hash)
+      array << hash
+    end
+    array[0..10000]
   end
 
 
-  #测试
+  #测试，parse_all方法
+  def self.test_all
+    #FileParse.test_all
+    a = [{"lng"=>"foo", "lat"=>"hello"}, {"lng"=>"bar", "lat"=>"world"}, {"lng"=>"wei", "lat"=>"jing"}]
+    b = ['1','2','3']
+    arr = [a, b].transpose.to_h
+    array = []
+    arr.each do |a1|
+      hash = {}
+      hash['count'] = a1[1]
+      hash = a1[0].merge(hash)
+      array << hash
+    end
+    p array
+  end
+
+  #测试,parse_position方法
   def self.test_code
     #FileParse.test_code
     a = [:foo, :bar, :baz, :bof]
