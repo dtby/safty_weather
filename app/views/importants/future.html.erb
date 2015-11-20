@@ -124,26 +124,14 @@
     var c_Height=$(document).height();
     $(".mapbar").css("height",c_Height);
 
-    var points = [
-      {"lng":121.24, "lat":31.4, "count":0.8},
-      {"lng":121.46, "lat":31.4, "count":0.8},
-      {"lng":121.24, "lat":30.92, "count":0.8},
-      {"lng":121.76, "lat":31.05, "count":0.8},
-      {"lng":121.7, "lat":31.19, "count":0.8},
-      {"lng":121.48, "lat":31.41, "count":0.8},
-      {"lng":121.4, "lat":31.73, "count":0.8},
-      {"lng":121.1, "lat":31.15, "count":0.8}
-    ]
-
-    // var points = gon.points;
-    // console.log(points);
+    var points = JSON.parse(gon.points);
 
     if(!isSupportCanvas()){
       alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
     }
     heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
     map.addOverlay(heatmapOverlay);
-    heatmapOverlay.setDataSet({data:points,max:1});
+    heatmapOverlay.setDataSet({data:points,max:0});
     function setGradient(){
       var gradient = {};
       var colors = document.querySelectorAll("input[type='color']");
