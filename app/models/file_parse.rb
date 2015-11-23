@@ -11,7 +11,7 @@ class FileParse
 
   def self.parse_position
     a = (118.958..123.278).step(0.01).to_a
-    b = (28.755..33.075).step(0.01).to_a
+    b = (28.755..33.075).step(0.01).to_a.reverse
     arr = a.product(b)
     array = []
     arr.each do |a1|

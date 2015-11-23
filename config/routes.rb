@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :routing
       get :future
+      post :get_typhoon
     end
   end
   resources :histories, only: :index do
