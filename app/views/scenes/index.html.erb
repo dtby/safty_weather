@@ -18,7 +18,7 @@
   <table>
     <tr>
       <th>地址</th>
-      <td id="address"></td>
+      <td id="address">上海市</td>
     </tr>
   </table>
   <div id="weather-info">
@@ -69,7 +69,7 @@
         map.clearOverlays();  //删除旧遮盖物
         map.addOverlay(new BMap.Marker(pt))  //添加新的遮盖物
         $("#getWeatherData").click();
-        $("#address").text(addComp.province + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+        $("#address").text(addComp.district + " " + addComp.street);
       });
     }
     map.addEventListener("click", showInfo);

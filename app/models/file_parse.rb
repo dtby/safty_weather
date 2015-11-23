@@ -1,7 +1,7 @@
 class FileParse
   def self.parse_file
     #FileParse.parse_file
-    file = File.readlines("public/1511160430.000")[2..-1]
+    file = File.readlines("public/1511160430.054")[2..-1]
     array = []
     file.each do |f|
       array = array + f.split(" ")
@@ -36,7 +36,7 @@ class FileParse
       hash = a1[0].merge(hash)
       array << hash
     end
-    array[0..10000]
+    array
   end
 
 

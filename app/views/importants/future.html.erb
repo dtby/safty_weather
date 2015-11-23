@@ -1,6 +1,4 @@
-<%= content_for :tabbar do %>
-  <%= render "tabbar"%>
-<% end %>
+<%= render "tabbar"%>
 
 <div class="searchbar">
   <form action="">
@@ -18,7 +16,7 @@
   <table>
     <tr>
       <th>位置</th>
-      <td  id="address"></td>
+      <td  id="address">上海市</td>
     </tr>
     <tr>
       <th>日期</th>
@@ -66,7 +64,7 @@
         var addComp = rs.addressComponents;
         map.clearOverlays();
         map.addOverlay(new BMap.Marker(pt) )
-        $("#address").text(addComp.province + " " + addComp.district + " " + addComp.street + " " + addComp.streetNumber);
+        $("#address").text(addComp.district + " " + addComp.street);
       });
     }
     map.addEventListener("click", showInfo);
@@ -124,6 +122,7 @@
     var c_Height=$(document).height();
     $(".mapbar").css("height",c_Height);
 
+    //热力图
     var points = JSON.parse(gon.points);
 
     if(!isSupportCanvas()){
@@ -131,7 +130,7 @@
     }
     heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
     map.addOverlay(heatmapOverlay);
-    heatmapOverlay.setDataSet({data:points,max:0});
+    heatmapOverlay.setDataSet({data:points,max:1});
     function setGradient(){
       var gradient = {};
       var colors = document.querySelectorAll("input[type='color']");
@@ -139,7 +138,7 @@
       colors.forEach(function(ele){
       gradient[ele.getAttribute("data-key")] = ele.value;
       });
-        heatmapOverlay.setOptions({"gradient":gradient});
+      heatmapOverlay.setOptions({"gradient":gradient});
     }
     //判断浏览区是否支持canvas
     function isSupportCanvas(){
