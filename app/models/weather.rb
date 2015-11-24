@@ -103,8 +103,8 @@ module Weather
         pic << bg_image_list[idx]
       end
     end
-    pic << weathertext if pic.empty?
-    txt << weathertext if txt.empty?
+    pic << text if pic.empty?
+    txt << text if txt.empty?
     result = Hash.new
     result["pic"] = pic
     result["txt"] = txt
