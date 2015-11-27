@@ -19,7 +19,7 @@
 <div class="mainContent">
   <div class="topBar">
     <% if @warning_data.present? %>
-      <% @warning_data.each do |warning|%>
+      <% @warning_data.each do |data|%>
         <section>
           <%= image_tag(Weather.get_image_pic(data['type'], data['level'])) %>
           <p><%= data['type'] %></p>
@@ -32,6 +32,40 @@
   </div>
 
   <div class="mainMap">
-    <%= image_tag("shanghai.gif") %>
+    <%= image_tag("shanghai-bg.gif", usemap: "#areamap", style: "width: 980;") %>
+    <map name="areamap" id="areamap">
+      <!-- 嘉定区 -->
+      <area shape="rect" coords="260,90,400,300"  nohref="nohref" alt="嘉定区" />
+      <!-- 崇明岛 -->
+      <area shape="rect" coords="557,74,843,190"  nohref="nohref" alt="崇明岛" />
+      <!-- 宝山区 -->
+      <area shape="rect" coords="428,110,548,260"  nohref="nohref" alt="宝山区" />
+      <!-- 市区 -->
+      <area shape="rect" coords="500,280,837,400"  nohref="nohref" alt="市区" />
+      <!-- 浦东新区 -->
+      <area shape="rect" coords="638,380,963,523"  nohref="nohref" alt="浦东新区" />
+      <!-- 奉贤区 -->
+      <area shape="rect" coords="460,530,774,645"  nohref="nohref" alt="奉贤区" />
+      <!-- 闵行区 -->
+      <area shape="rect" coords="240,420,424,576"  nohref="nohref" alt="闵行区" />
+      <!-- 松江区 -->
+      <area shape="rect" coords="460,530,774,645"  nohref="nohref" alt="松江区" />
+      <!-- 金山区 -->
+      <area shape="rect" coords="160,600,470,760"  nohref="nohref" alt="金山区" />
+      <!-- 青浦区 -->
+      <area shape="rect" coords="20,280,220,520"  nohref="nohref" alt="青浦区" />
+    </map>
   </div>
 </div>
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag "jquery.rwdImageMaps.min" %>
+  <script type="text/javascript">
+    $(document).ready(function(e) {
+      $('img[usemap]').rwdImageMaps();
+      $('area').on('click', function(e) {
+        alert($(this).attr("alt"));
+      });
+    });
+  </script>
+<% end %>

@@ -38,6 +38,7 @@
     padding: 0 2%;
     .topBar {
       margin: 70px 0 20px 0;
+      overflow: hidden;
       p.alert {
         font-size: 16px;
         color: $white-color;
@@ -55,6 +56,12 @@
       }
     }
     .mainMap {
+      img[usemap] {
+        border: none;
+        height: auto;
+        max-width: 100%;
+        width: auto;
+      }
     }
   }
 }

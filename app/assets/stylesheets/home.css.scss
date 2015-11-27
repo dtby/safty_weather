@@ -2,9 +2,10 @@
 
 .home_index {
   .topbar {
-    padding: 3%;
+    padding: 1%;
     background: $home-topbar-color;
     .title {
+      font-size: 1.6rem;
       color: $white-color;
       text-align: center;
       margin: 5px 0;
@@ -16,15 +17,22 @@
       p {
         margin: 15px 0;
       }
+      h3 {
+        font-size: 2.8rem;
+      }
     }
     .weather-info {
       color: $white-color;
       ul {
+        padding: 0 3%;
         overflow: hidden;
         li {
           width: 50%;
           float: left;
           padding: 10px 0;
+          span {
+            font-size: 2rem;
+          }
         }
       }
     }
@@ -38,12 +46,15 @@
         float: left;
         padding: 10px 0;
         text-align: center;
+        font-size: 1.6rem;
         background: $white-color;
         &.bg {
           background: $li-color;
         }
         img {
-          width: 100%;
+          width: 103px;
+          height: 103px;
+          overflow: hidden;
         }
         p {
           font-size: 12px;
