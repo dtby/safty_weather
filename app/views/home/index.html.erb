@@ -41,7 +41,7 @@
       <% end %>
         <p><%= weather["datatime"] %></p>
         <p><%= get_weekday weather["datatime"] %></p>
-        <%= image_tag(Weather.get_weather_icons(weather["weatherpic"])['pic'][0])%>
+        <%= image_tag(Weather.get_weather_icons(weather["weatherpic"])['active_pic'][0])%>
         <p><%= weather["weather"] %></p>
         <p><%= weather["tempe"] %></p>
       </li>

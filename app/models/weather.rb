@@ -95,18 +95,48 @@ module Weather
       "冰雹" => "weather_hail.png",
       "阵雪" => "weather_big_snow.png"
     }
+    active_bg_image_list = {
+      "暴雪" => "active/weather_super_snow.png",
+      "暴雨" => "active/weather_rainstorm.png",
+      "大暴雨" => "active/weather_big_rainstorm.png",
+      "特大暴雨" => "active/weather_super_rainstorm.png",
+      "强沙尘暴" => "active/weather_sandstorm.png",
+      "大雪" => "active/weather_big_snow.png",
+      "大雨" => "active/weather_big_rain.png",
+      "冻雨" => "active/weather_sleet_rain.png",
+      "浮尘" => "active/weather_dust.png",
+      "阵雨" => "active/weather_shower_rain.png",
+      "雷阵雨" => "active/weather_thunder_rain.png",
+      "沙尘暴" => "active/weather_sandstorm.png",
+      "雾" => "active/weather_fog.png",
+      "小雪" => "active/weather_little_snow.png",
+      "小雨" => "active/weather_little_rain.png",
+      "扬沙" => "active/weather_jansa.png",
+      "阴" => "active/weather_overcast.png",
+      "雨夹雪" => "active/weather_sleet.png",
+      "中雪" => "active/weather_mid_snow.png",
+      "中雨" => "active/weather_mid_rain.png",
+      "晴" => "active/weather_sunny.png",
+      "多云" => "active/weather_cloudy.png",
+      "冰雹" => "active/weather_hail.png",
+      "阵雪" => "active/weather_big_snow.png"
+    }
     pic = []
+    active_pic = []
     txt = []
     results.each do |idx|
       if weather_list.include?(idx)
         txt << idx
         pic << bg_image_list[idx]
+        active_pic << active_bg_image_list[idx]
       end
     end
     pic << text if pic.empty?
     txt << text if txt.empty?
+    active_pic << text if active_pic.empty?
     result = Hash.new
     result["pic"] = pic
+    result["active_pic"] = active_pic
     result["txt"] = txt
 
     return result
