@@ -7,10 +7,16 @@ module Weather
   WARNING_URL = "/api/v1/warnings/city?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   AUTO_URL = "/api/v1/auto_stations/locate_nation_wide?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   TYPHOONS_URL = "/api/v1/typhoons?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
+  LIFE_URL = "/publicdata/data?type=live_index&appid=LV08MwglXetHcxdaUTIR&appkey=3LpFnUP84xhj5HaIcmKGAC2yezMgY9"
 
   #台风列表数据
   def self.get_typhoons_data
     self.get_data_from_url(TYPHOONS_URL)
+  end
+
+  #洗车指数
+  def self.get_life_data
+    self.get_data_from_url(LIFE_URL)
   end
 
   #单个台风数据

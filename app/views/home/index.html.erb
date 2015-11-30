@@ -12,19 +12,21 @@
     <ul>
       <li>
         <%= image_tag("svg/wendu.svg")%>
-        <span><%= @weather_info_first["tempe"] %></span></li>
+        <span><%= @weather_info_first["tempe"] %></span>
+      </li>
       <li>
-       <%= image_tag("svg/position.svg")%>
-       <span>上海</span>
+        <%= image_tag("svg/wind.svg")%>
+        <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
       </li>
       <li>
         <%= image_tag("aqi.png")%>
         <span><%= @aqi_info['aqi']%></span>
         <span><%= @aqi_info['level']%></span>
       </li>
+
       <li>
-        <%= image_tag("svg/wind.svg")%>
-        <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
+       <%= image_tag("svg/car.svg")%>
+       <span><%= @life_info %></span>
       </li>
     </ul>
   </div>
