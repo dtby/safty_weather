@@ -4,6 +4,17 @@ class ImportantsController < ApplicationController
     @warning_data = warning_info['data']
   end
 
+  def get_by_unit
+    warning_info = Weather.get_warning_data
+    @warning_data = warning_info['data']
+    #区县预警
+    area_warning_info = Weather.get_area_warning_data(params[:unit])
+    @area_warning_data = area_warning_info['data']
+    respond_to do |format|
+      format.js
+    end
+  end
+
   #未来降水
   def future
     #@points = FileParse.parse_all.reject{|x| x['count'] == 0.0}

@@ -98,3 +98,42 @@ footer {
     }
   }
 }
+
+//全局模态框
+.modal-bg {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.modal-content {
+  display: none;
+  position: absolute;
+  background: #fff;
+  left: 10%;
+  right: 10%;
+  top: 20%;
+  z-index: 2;
+  border-radius: .5rem;
+  .modal-title {
+    color: $white-color;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    background: $modal-title-bg;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+  }
+  .modal-body {
+    min-height: 6rem;
+    .alert {
+      padding: 2rem 0;
+    }
+  }
+}

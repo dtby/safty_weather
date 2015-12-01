@@ -19,11 +19,9 @@
 <div class="mainContent">
   <div class="topBar">
     <% if @warning_data.present? %>
-      <% @warning_data.each do |data|%>
+      <% @warning_data[0..2].each do |data|%>
         <section>
           <%= image_tag(Weather.get_image_pic(data['type'], data['level'])) %>
-          <p><%= data['type'] %></p>
-          <p><%= data['content'] %></p>
         </section>
       <% end %>
     <% else %>
@@ -33,29 +31,35 @@
 
   <div class="mainMap">
     <%= image_tag("shanghai-bg.gif", usemap: "#areamap", style: "width: 980;") %>
-    <map name="areamap" id="areamap">
+    <map name="areamap" id="areamap" data-url=<%= get_by_unit_importants_path %>>
       <!-- 嘉定区 -->
-      <area shape="rect" coords="260,90,400,300"  nohref="nohref" alt="嘉定区" />
+      <area shape="rect" coords="260,90,400,300"  nohref="nohref" alt="嘉定" />
       <!-- 崇明岛 -->
-      <area shape="rect" coords="557,74,843,190"  nohref="nohref" alt="崇明岛" />
+      <area shape="rect" coords="557,74,843,190"  nohref="nohref" alt="崇明" />
       <!-- 宝山区 -->
-      <area shape="rect" coords="428,110,548,260"  nohref="nohref" alt="宝山区" />
+      <area shape="rect" coords="428,110,548,260"  nohref="nohref" alt="宝山" />
       <!-- 市区 -->
-      <area shape="rect" coords="500,280,837,400"  nohref="nohref" alt="市区" />
+      <area shape="rect" coords="500,280,837,400"  nohref="nohref" alt="上海" />
       <!-- 浦东新区 -->
-      <area shape="rect" coords="638,380,963,523"  nohref="nohref" alt="浦东新区" />
+      <area shape="rect" coords="638,380,963,523"  nohref="nohref" alt="浦东" />
       <!-- 奉贤区 -->
-      <area shape="rect" coords="460,530,774,645"  nohref="nohref" alt="奉贤区" />
+      <area shape="rect" coords="460,530,774,645"  nohref="nohref" alt="奉贤" />
       <!-- 闵行区 -->
-      <area shape="rect" coords="240,420,424,576"  nohref="nohref" alt="闵行区" />
+      <area shape="rect" coords="430,412,606,510"  nohref="nohref" alt="闵行" />
       <!-- 松江区 -->
-      <area shape="rect" coords="460,530,774,645"  nohref="nohref" alt="松江区" />
+      <area shape="rect" coords="235,426,420,570"  nohref="nohref" alt="松江" />
       <!-- 金山区 -->
-      <area shape="rect" coords="160,600,470,760"  nohref="nohref" alt="金山区" />
+      <area shape="rect" coords="160,600,470,760"  nohref="nohref" alt="金山" />
       <!-- 青浦区 -->
-      <area shape="rect" coords="20,280,220,520"  nohref="nohref" alt="青浦区" />
+      <area shape="rect" coords="20,280,220,520"  nohref="nohref" alt="青浦" />
     </map>
   </div>
+</div>
+
+<!-- 模态框 -->
+<div class="modal-bg"></div>
+<div class="modal-content">
+  <%= render partial: "get_by_unit", locals: {unit: "上海"} %>
 </div>
 
 <% content_for :scripts do %>
@@ -63,8 +67,19 @@
   <script type="text/javascript">
     $(document).ready(function(e) {
       $('img[usemap]').rwdImageMaps();
+      var url = $("map").data('url');
       $('area').on('click', function(e) {
-        alert($(this).attr("alt"));
+        $.ajax({
+          type: "GET",
+          url: url,
+          data: {unit: $(this).attr("alt")}
+        })
+      });
+
+      $('body').click(function(e){
+        $(".modal-bg").hide();
+        $(".modal-content").hide();
+        e.stopPropagation();
       });
     });
   </script>

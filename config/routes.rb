@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :routing
       get :future
       post :get_typhoon
+      get :get_by_unit
     end
   end
   resources :histories, only: :index do
