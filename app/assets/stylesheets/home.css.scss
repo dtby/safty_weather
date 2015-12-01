@@ -23,6 +23,29 @@
     }
     .weather-info {
       color: $white-color;
+      .excellent, .good, .mild, .moderate, .severe, .serious {
+        font-size: 1.4rem;
+        padding: .1rem 1rem;
+        border-radius: .2rem;
+      }
+      .excellent {
+        background: #188743;
+      }
+      .good {
+        background: #e5da1e;
+      }
+      .mild {
+        background: #dfb724;
+      }
+      .moderate {
+        background: #cb2028;
+      }
+      .severe {
+        background: #80287f;
+      }
+      .serious {
+        background: #701419;
+      }
       ul {
         padding: 0 3%;
         overflow: hidden;
@@ -30,6 +53,7 @@
           width: 50%;
           float: left;
           padding: 10px 0;
+          font-size: 2rem;
           span {
             font-size: 2rem;
           }

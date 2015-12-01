@@ -19,6 +19,12 @@ module Weather
     self.get_data_from_url(LIFE_URL)
   end
 
+  #区县预警
+  def self.get_area_warning_data area_name
+    @AREA_WARNING_URL = "/api/v1/warnings/district?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy&unit=" + area_name
+    self.get_data_from_url(@AREA_WARNING_URL)
+  end
+
   #单个台风数据
   def self.get_typhoon_data typhoon_id
     @TYPHOON_URL = "/api/v1/typhoons/" + typhoon_id + "?appid=ZfQg2xyW04X3umRPsi9H&appkey=xWOX5kAYVSduEl38oJctyRgB2NDMpH"

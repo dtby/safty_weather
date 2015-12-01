@@ -24,4 +24,16 @@ module ApplicationHelper
     end
   end
 
+  #空气状况分类
+  def aqi_level
+    {
+      "优" => "excellent",
+      "良" => "good",
+      "轻度污染" => "mild",
+      "中度污染" => "moderate",
+      "重度污染" => "severe",
+      "严重污染" => "serious"
+    }
+  end
+
 end

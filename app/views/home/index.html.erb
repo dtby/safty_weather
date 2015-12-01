@@ -21,9 +21,8 @@
       <li>
         <%= image_tag("aqi.png")%>
         <span><%= @aqi_info['aqi']%></span>
-        <span><%= @aqi_info['level']%></span>
+        <span class=<%= aqi_level[@aqi_info['level']]%>><%= @aqi_info['level']%></span>
       </li>
-
       <li>
        <%= image_tag("svg/car.svg")%>
        <span><%= @life_info %></span>
