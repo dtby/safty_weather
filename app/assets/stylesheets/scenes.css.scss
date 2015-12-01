@@ -27,23 +27,30 @@
       width: 50px;
       background: #cdcdcd;
       display: block;
-      border-radius: 5px;
+      border-radius: .5rem;
     }
   }
-  .weather-info {
-    width: 33%;
-    color: $main-color;
-    border: solid 2px $main-color;
-    background: #fff;
+  .tipsContent {
     position: absolute;
-    right: 10px;
-    bottom: 70px;
-    border-radius: 5px;
-    th {
-      font-weight: normal;
-    }
-    td {
-      padding-left: 5px;
+    right: 1rem;
+    bottom: 2rem;
+    border-radius: .5rem;
+    padding: .3rem;
+    .weather-info {
+      color: $main-color;
+      border: solid 2px $main-color;
+      background: #fff;
+      border-radius: .5rem;
+      padding: .5rem;
+      tr {
+        line-height: 2.4rem;
+      }
+      th {
+        font-weight: normal;
+      }
+      td {
+        padding-left: .5rem;
+      }
     }
   }
 }

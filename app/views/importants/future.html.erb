@@ -16,25 +16,44 @@
   <div id="allmap"></div>
 </div>
 
-<div class="weather-info">
-  <table>
-    <tr>
-      <th>位置</th>
-      <td  id="address">上海市</td>
-    </tr>
-    <tr>
-      <th>日期</th>
-      <td id="date">18°C</td>
-    </tr>
-    <tr>
-      <th>天气</th>
-      <td id="weather">998hPa</td>
-    </tr>
-    <tr>
-      <th>降水量</th>
-      <td id="rain">35/82</td>
-    </tr>
-  </table>
+<%= link_to "", class: "leida" do %>
+  <%= image_tag("leida.png") %>
+<% end %>
+
+<div class="tipsContent">
+  <div class="weather-info">
+    <table>
+      <tr>
+        <th class="text-left">当前位置</th>
+        <td id="address">上海市</td>
+      </tr>
+      <tr>
+        <th>未来30min降水</th>
+        <td id="date">100mm</td>
+      </tr>
+      <tr>
+        <th>未来60min降水</th>
+        <td id="weather">100mm</td>
+      </tr>
+      <tr>
+        <th>未来90min降水</th>
+        <td id="rain">100mm</td>
+      </tr>
+    </table>
+  </div>
+  <%= link_to "javascript:void(0);", class: "riskBtn" do %>
+    <span>风险防范措施</span>
+    <%= image_tag("hand.png")%>
+  <% end -%>
+</div>
+
+<!-- 模态框 -->
+<div class="modal-bg"></div>
+<div class="modal-content">
+  <div class="modal-title">风险预防措施</div>
+  <div class="modal-body">
+    <div class="text-center">暂无风险预防措施</div>
+  </div>
 </div>
 
 <% content_for :scripts do %>
@@ -123,8 +142,12 @@
       local.search(myValue);
     }
     //地图的高度等于屏幕的高度
-    var c_Height=$(document).height();
+    var c_Height=($(document).height() - 171) + "px";
     $(".mapbar").css("height",c_Height);
+
+    //风险防范措施按钮宽度等于降水信息宽度
+    var b_width = $(".weather-info").width() + "px";
+    $(".riskBtn").css("width", b_width);
 
     //热力图
     var points = JSON.parse(gon.points);
@@ -149,6 +172,17 @@
         var elem = document.createElement('canvas');
         return !!(elem.getContext && elem.getContext('2d'));
     }
+
+    //风险防范措施模态框
+    $(".riskBtn").click(function(e){
+      $(".modal-bg").show(300);
+      $(".modal-content").show(300);
+      e.stopPropagation();
+    });
+    $('body').click(function(e){
+      $(".modal-bg").hide();
+      $(".modal-content").hide();
+    });
   </script>
 <% end %>
 

@@ -1,3 +1,3 @@
-$(".modal-bg").show();
-$(".modal-content").show();
+$(".modal-bg").show(300);
+$(".modal-content").show(300);
 $(".modal-content").html($("<%= escape_javascript(render partial: 'get_by_unit', locals: {unit: params[:unit]}) %>"));
