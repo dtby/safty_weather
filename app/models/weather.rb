@@ -8,6 +8,13 @@ module Weather
   AUTO_URL = "/api/v1/auto_stations/locate_nation_wide?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   TYPHOONS_URL = "/api/v1/typhoons?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   LIFE_URL = "/publicdata/data?type=live_index&appid=LV08MwglXetHcxdaUTIR&appkey=3LpFnUP84xhj5HaIcmKGAC2yezMgY9"
+  QPF_URL = "/api/v1/qpfs/locate?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
+
+  #降水分析
+  def self.get_qpf_data lon, lat
+    url = QPF_URL + "&lon=" + lon.to_s + "&lat=" + lat.to_s
+    self.get_data_from_url(url)
+  end
 
   #台风列表数据
   def self.get_typhoons_data
