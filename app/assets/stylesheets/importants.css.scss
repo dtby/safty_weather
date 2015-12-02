@@ -83,18 +83,82 @@
       height: 100%;
     }
   }
-  .riskBtn {
-    height: 2rem;
-    line-height: 2rem;
-    color: $white-color;
-    background: $main-color;
-    padding: .5rem;
-    margin-top: 1.5rem;
-    border-radius: .3rem;
-    display: block;
-    img {
-      float: right;
-      margin: -0.1rem 0!important;
+}
+
+.riskBtn {
+  height: 2rem;
+  line-height: 2rem;
+  color: $white-color;
+  background: $main-color;
+  padding: .5rem;
+  margin-top: 1.5rem;
+  border-radius: .3rem;
+  display: block;
+  img {
+    float: right;
+    margin: -0.1rem 0!important;
+  }
+}
+
+.importants_routing {
+  .typhoonInfo {
+    position: absolute;
+    right: 1rem;
+    top: 5rem;
+    z-index: 9;
+  }
+  .typhoon-info {
+    background: #eb5405;
+    border: 2px #cd979a solid;
+    border-radius: .5rem;
+    padding: 1rem 2rem;
+    table {
+      color: $white-color;
+      td {
+        padding-left: .8rem;
+      }
+    }
+  }
+
+  .typhoon-list {
+    position: absolute;
+    left: 1rem;
+    bottom: 5rem;
+    z-index: 9;
+    background: #fff;
+    border: 2px #cd979a solid;
+    border-radius: .5rem;
+    padding: 1rem 2rem;
+    li {
+      color: #ef402b;
+      height: 2rem;
+      line-height: 2rem;
+    }
+    .circle {
+      width: 1.2rem;
+      height: 1.2rem;
+      border-radius: 50%;
+      display: block;
+      float: left;
+      margin: .4rem .5rem .4rem 0;
+      &.black {
+        background: #000;
+      }
+      &.purple {
+        background: #9e14c1;
+      }
+      &.red {
+        background: #ff0000;
+      }
+      &.orange {
+        background: #ff7800;
+      }
+      &.yellow {
+        background: #fffc00;
+      }
+      &.blue {
+        background: #204a9f;
+      }
     }
   }
 }

@@ -66,11 +66,6 @@
           map.addOverlay(mk);
           map.panTo(r.point);
           showInfo(r);  //自定定位并显示当前区域
-          // $.ajax({
-          //   type: "GET",
-          //   url: "/importants/future",
-          //   data: {lng: r.point.lng, lat: r.point.lat}
-          // })
         }
         else {
           alert('failed'+this.getStatus());

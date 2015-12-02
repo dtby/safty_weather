@@ -8,12 +8,81 @@
   <div id="allmap"></div>
 </div>
 
-<div class="select" style="position: absolute; right: 0; bottom: 60px; z-index: 1;">
-  <%= select_tag "typhoonid", options_for_select(@typhoons_data.collect{|v| [v['enname'], v['typhoonid']]})%>
-</div>
-
 <div id="data">
   <%= render partial: "data", locals: {typhoon_recorder: @typhoon_recorder}%>
+</div>
+
+<div class="typhoonInfo">
+  <div class="typhoon-info">
+    <table>
+      <tr>
+        <th>台风名称</th>
+        <td>
+          <div class="select">
+            <%= select_tag "typhoonid", options_for_select(@typhoons_data.collect{|v| [v['cnname'].present? ? v['cnname'] : v['enname'] , v['typhoonid']]})%>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>中心风力</th>
+        <td>23级</td>
+      </tr>
+      <tr>
+        <th>七级风圈</th>
+        <td>300km</td>
+      </tr>
+      <tr>
+        <th>十级风圈</th>
+        <td>500km</td>
+      </tr>
+      <tr>
+        <th>距离上海</th>
+        <td>55.13km</td>
+      </tr>
+    </table>
+  </div>
+  <%= link_to "javascript:void(0);", class: "riskBtn" do %>
+    <span>风险防范措施</span>
+    <%= image_tag("hand.png")%>
+  <% end -%>
+</div>
+
+<!-- 模态框 -->
+<div class="modal-bg"></div>
+<div class="modal-content">
+  <div class="modal-title">风险预防措施</div>
+  <div class="modal-body">
+    <div class="text-center">内容未定</div>
+  </div>
+</div>
+
+<div class="typhoon-list">
+  <ul>
+    <li>
+      <i class="circle black"></i>
+      超强台风
+    </li>
+    <li>
+      <i class="circle purple"></i>
+      强台风
+    </li>
+    <li>
+      <i class="circle red"></i>
+      台风
+    </li>
+    <li>
+      <i class="circle orange"></i>
+      强热带风暴
+    </li>
+    <li>
+      <i class="circle yellow"></i>
+      热带风暴
+    </li>
+    <li>
+      <i class="circle blue"></i>
+      热带低压
+    </li>
+  </ul>
 </div>
 
 <% content_for :scripts do %>
@@ -24,6 +93,22 @@
         type: 'POST',
         data: {typhoonid: $(this).val()}
       })
+    });
+    $(function(){
+      //风险防范措施模态框
+      $(".riskBtn").click(function(e){
+        $(".modal-bg").show(300);
+        $(".modal-content").show(300);
+        e.stopPropagation();
+      });
+      $('body').click(function(e){
+        $(".modal-bg").hide();
+        $(".modal-content").hide();
+      });
+
+      //风险防范措施按钮宽度等于降水信息宽度
+      var b_width = $(".typhoonInfo").width() + "px";
+      $(".riskBtn").css("width", b_width);
     });
   </script>
 <% end %>
