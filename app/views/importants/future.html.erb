@@ -52,7 +52,7 @@
 <div class="modal-content">
   <div class="modal-title">风险预防措施</div>
   <div class="modal-body">
-    <div class="text-center">暂无风险预防措施</div>
+    <div class="text-center">内容未定</div>
   </div>
 </div>
 
@@ -87,7 +87,7 @@
         var addComp = rs.addressComponents;
         map.clearOverlays();
         map.addOverlay(new BMap.Marker(pt) )
-        $("#address").text(addComp.district + " " + addComp.street);
+        $("#address").text(addComp.district);
       });
     }
     map.addEventListener("click", showInfo);

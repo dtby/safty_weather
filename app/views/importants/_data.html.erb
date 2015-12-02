@@ -4,32 +4,48 @@
 <%= javascript_include_tag "http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js", 'data-turbolinks-track' => false %>
 
 <script type="text/javascript">
-  var map = new BMap.Map("allmap");
-  //台风路径画线
-  var recorder = $(".dataArray").data('url');
-  console.log(recorder[0].lon);
-  var point = new BMap.Point(recorder[0].lon, recorder[0].lat);
-  map.centerAndZoom(point, 5);  // 初始化地图,设置中心点坐标和地图级别
-  map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
+  $(function(){
+    var map = new BMap.Map("allmap");
+    //台风路径画线
+    var recorder = $(".dataArray").data('url');
+    console.log(typeof(recorder));
+    var point = new BMap.Point(recorder[0].lon, recorder[0].lat);
+    map.centerAndZoom(point, 5);  // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
 
-  //添加台风覆盖图
-  var pt = new BMap.Point(recorder[0].lon, recorder[0].lat);
-  var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
-  var myIcon = new BMap.Icon(image, new BMap.Size(300,300));
-  var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
-  map.addOverlay(marker2);
+    // var b = new BMap.Bounds(new BMap.Point(recorder[0].lon, recorder[0].lat),new BMap.Point(recorder[-1].lon, recorder[-1].lat));
+    // try {
+    //   BMapLib.AreaRestriction.setBounds(map, b);
+    // } catch (e) {
+    //   alert(e);
+    // }
 
-  var points = new Array();
-  for(var i=0; i < recorder.length; i++) {
-    var point = new BMap.Point(recorder[i].lon, recorder[i].lat);
-    points.push(point);
-  }
-  console.log(points);
-  console.log(typeof(points));
-  var curve = new BMapLib.CurveLine(points, {strokeColor:"red", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
-  map.addOverlay(curve); //添加到地图中
+    //添加台风覆盖图,台风图标的位置为当前日期的台风
+    var pt = new BMap.Point(recorder[0].lon, recorder[0].lat);
+    var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
+    var myIcon = new BMap.Icon(image, new BMap.Size(30,30));
+    var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+    map.addOverlay(marker2);
 
-  //地图的高度等于屏幕的高度
-  var c_Height=$(document).height();
-  $(".mapbar").css("height",c_Height);
+    var points = new Array();
+    for(var i=0; i < recorder.length; i++) {
+      var point = new BMap.Point(recorder[i].lon, recorder[i].lat);
+      points.push(point);
+    }
+    console.log(points);
+    console.log(typeof(points));
+    var curve = new BMapLib.CurveLine(points, {strokeColor:"red", strokeWeight:1, strokeOpacity:0.5}); //创建弧线对象
+    map.addOverlay(curve); //添加到地图中
+
+    //根据台风坐标创建圆形
+    for(var i = 0; i < points.length; i++) {
+      console.log(points[i].lng, points[i].lat)
+      c_point = new BMap.Point(points[i].lng, points[i].lat);
+      var circle = new BMap.Circle(new BMap.Point(points[i].lng, points[i].lat), 5000, {strokeColor: "black", strokeWeight: 2, strokeOpacity: 0.5});
+      map.addOverlay(circle);
+    }
+    //地图的高度等于屏幕的高度
+    var c_Height=($(document).height() - 111) + "px";
+    $(".mapbar").css("height",c_Height);
+  });
 </script>
