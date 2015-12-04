@@ -45,7 +45,6 @@ class ImportantsController < ApplicationController
 
     #单个台风
     @typhoon_recorder = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data']
-    #@typhoon_recorders = @typhoon_recorder.to_json
   end
 
   #单个台风

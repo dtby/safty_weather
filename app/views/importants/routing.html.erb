@@ -87,14 +87,18 @@
 
 <% content_for :scripts do %>
   <script type="text/javascript">
-    $('#typhoonid').change(function(){
-      $.ajax({
-        url: "/importants/get_typhoon",
-        type: 'POST',
-        data: {typhoonid: $(this).val()}
-      })
-    });
     $(function(){
+      ajaxReq();
+      $('#typhoonid').change(function(){
+        ajaxReq();
+      });
+      function ajaxReq(){
+        $.ajax({
+          url: "/importants/get_typhoon",
+          type: 'GET',
+          data: {typhoonid: $(this).val()}
+        })
+      }
       //风险防范措施模态框
       $(".riskBtn").click(function(e){
         $(".modal-bg").show(300);

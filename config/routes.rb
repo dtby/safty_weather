@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :routing
       get :future
-      post :get_typhoon
+      get :get_typhoon
       get :get_by_unit
       get :get_rain
     end

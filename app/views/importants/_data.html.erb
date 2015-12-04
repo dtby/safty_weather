@@ -41,7 +41,7 @@
     for(var i = 0; i < points.length; i++) {
       console.log(points[i].lng, points[i].lat)
       c_point = new BMap.Point(points[i].lng, points[i].lat);
-      var circle = new BMap.Circle(new BMap.Point(points[i].lng, points[i].lat), 5000, {strokeColor: "black", strokeWeight: 2, strokeOpacity: 0.5});
+      var circle = new BMap.Circle(new BMap.Point(points[i].lng, points[i].lat), 9000, {strokeColor: "black", strokeWeight: 2, strokeOpacity: 0.5});
       map.addOverlay(circle);
     }
     //地图的高度等于屏幕的高度
