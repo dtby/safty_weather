@@ -58,19 +58,41 @@
       map.centerAndZoom(point, 11);  // 初始化地图,设置中心点坐标和地图级别
       map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
 
+      //地图第一步加载热力图
+      var points = JSON.parse(gon.points);
+
+      if(!isSupportCanvas()){
+        alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+      }
+      heatmapOverlay = new BMapLib.HeatmapOverlay({
+        "radius":20,
+        'opacity': 0.7,
+        'gradient': {0.5:'#94a5cb', 0.8:'#5d79b7', 1:'#4463aa'}
+      });
+      map.addOverlay(heatmapOverlay);
+      heatmapOverlay.setDataSet({data:points,max:1});
+      //判断浏览区是否支持canvas
+      function isSupportCanvas(){
+        var elem = document.createElement('canvas');
+        return !!(elem.getContext && elem.getContext('2d'));
+      }
+
       //定位到当前位置
-      var geolocation = new BMap.Geolocation();
-      geolocation.getCurrentPosition(function(r){
-        if(this.getStatus() == BMAP_STATUS_SUCCESS){
-          var mk = new BMap.Marker(r.point);
-          map.addOverlay(mk);
-          map.panTo(r.point);
-          showInfo(r);  //自定定位并显示当前区域
-        }
-        else {
-          alert('failed'+this.getStatus());
-        }
-      },{enableHighAccuracy: true})
+      // var mk;
+      // var geolocation = new BMap.Geolocation();
+      // geolocation.getCurrentPosition(function(r){
+      //   if(this.getStatus() == BMAP_STATUS_SUCCESS){
+      //     var mk = new BMap.Marker(r.point);
+      //     map.addOverlay(mk);
+      //     map.panTo(r.point);
+      //     showInfo(r);  //自定定位并显示当前区域
+      //   }
+      //   else {
+      //     alert('failed'+this.getStatus());
+      //   }
+      // },{enableHighAccuracy: true})
+
+      //console.log(map.getOverlays());
 
       //获取点击位置的解析区域
       var gc = new BMap.Geocoder();
@@ -139,6 +161,7 @@
         });
         local.search(myValue);
       }
+
       //地图的高度等于屏幕的高度
       var c_Height=($(document).height() - 171) + "px";
       $(".mapbar").css("height",c_Height);
@@ -146,30 +169,6 @@
       //风险防范措施按钮宽度等于降水信息宽度
       var b_width = $(".weather-info").width() + "px";
       $(".riskBtn").css("width", b_width);
-
-      //热力图
-      var points = JSON.parse(gon.points);
-
-      if(!isSupportCanvas()){
-        alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
-      }
-      heatmapOverlay = new BMapLib.HeatmapOverlay({"radius":20});
-      map.addOverlay(heatmapOverlay);
-      heatmapOverlay.setDataSet({data:points,max:1});
-      function setGradient(){
-        var gradient = {};
-        var colors = document.querySelectorAll("input[type='color']");
-        colors = [].slice.call(colors,0);
-        colors.forEach(function(ele){
-        gradient[ele.getAttribute("data-key")] = ele.value;
-        });
-        heatmapOverlay.setOptions({"gradient":gradient});
-      }
-      //判断浏览区是否支持canvas
-      function isSupportCanvas(){
-          var elem = document.createElement('canvas');
-          return !!(elem.getContext && elem.getContext('2d'));
-      }
 
       //风险防范措施模态框
       $(".riskBtn").click(function(e){

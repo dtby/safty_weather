@@ -39,36 +39,9 @@ class FileParse
     array
   end
 
-
-  #测试，parse_all方法
-  def self.test_all
-    #FileParse.test_all
-    a = [{"lng"=>"foo", "lat"=>"hello"}, {"lng"=>"bar", "lat"=>"world"}, {"lng"=>"wei", "lat"=>"jing"}]
-    b = ['1','2','3']
-    arr = [a, b].transpose.to_h
-    array = []
-    arr.each do |a1|
-      hash = {}
-      hash['count'] = a1[1]
-      hash = a1[0].merge(hash)
-      array << hash
-    end
-    p array
-  end
-
-  #测试,parse_position方法
-  def self.test_code
-    #FileParse.test_code
-    a = [:foo, :bar, :baz, :bof]
-    b = ["hello", "world", 1, 2]
-    arr = a.product(b)
-    array = []
-    arr.each do |a1|
-      hash = {}
-      hash['lng'] = a1[0]
-      hash['lat'] = a1[1]
-      array << hash
-    end
-    p array
+  def self.store_data
+    #FileParse.store_data
+    raindata = FileParse.parse_all.reject{|x| x['count'] == 0.0}
+    $redis.set('raindata', raindata.to_json)
   end
 end

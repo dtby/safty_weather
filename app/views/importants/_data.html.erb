@@ -9,8 +9,9 @@
     //台风路径画线
     var recorder = $(".dataArray").data('url');
     console.log(typeof(recorder));
-    var point = new BMap.Point(recorder[0].lon, recorder[0].lat);
-    map.centerAndZoom(point, 5);  // 初始化地图,设置中心点坐标和地图级别
+    //var point = new BMap.Point(recorder[0].lon, recorder[0].lat);
+    var point = new BMap.Point(118.454, 32.955);
+    map.centerAndZoom(point, 6);  // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
 
     // var b = new BMap.Bounds(new BMap.Point(recorder[0].lon, recorder[0].lat),new BMap.Point(recorder[-1].lon, recorder[-1].lat));
