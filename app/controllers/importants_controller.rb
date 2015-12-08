@@ -17,13 +17,21 @@ class ImportantsController < ApplicationController
 
   #未来降水
   def future
-    @points = FileParse.parse_all.reject{|x| x['count'] == 0.0}
-    #@points = FileParse.parse_all
-    #@points = $redis.get("raindata")
-    # p "xxxxxxxx"
-    # p @points == $redis.get("raindata")
-    gon.points = $redis.get("raindata")
-
+    mappings = {"lon" => "lng", "lat" => "lat", "data" => "count"}
+    #测试代码，本地数据
+    rains = ActiveSupport::JSON.decode($redis.get("rain"))["data"].reject{|x| x['data'] == 0}
+    #正式代码，无数据
+    #rains = Weather.get_rain_data["data"].reject{|x| x['data'] == 0}
+    arr = []
+    rains.each do |obj|
+      ps = ActiveSupport::JSON.decode(obj.to_json)
+      arr.push Hash[ps.map {|k, v| [mappings[k], v] }]
+    end
+    p arr
+    p "xxxxxxxxx"
+    @points = arr.reject{|x| x['count'] == 0}
+    gon.points = @points.to_json
+    p @points.to_json
     # @points = Weather.get_rain_data["data"]
     # gon.points = @points.to_json
     #qpf_info = Weather.get_qpf_data(params[:lng], params[:lat])

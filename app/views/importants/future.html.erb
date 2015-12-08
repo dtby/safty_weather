@@ -16,8 +16,7 @@
   <div id="allmap"></div>
 </div>
 
-<%= link_to "", class: "leida" do %>
-  <%= image_tag("leida.png") %>
+<%= link_to "javascript:void(0);", class: "leida" do %>
 <% end %>
 
 <div class="tipsContent">
@@ -55,44 +54,25 @@
       //初始化地图
       var map = new BMap.Map("allmap");
       var point = new BMap.Point(121.48,31.22);
-      map.centerAndZoom(point, 11);  // 初始化地图,设置中心点坐标和地图级别
+      map.centerAndZoom(point, 8);  // 初始化地图,设置中心点坐标和地图级别
       map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
 
-      //地图第一步加载热力图
-      var points = JSON.parse(gon.points);
-
-      if(!isSupportCanvas()){
-        alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
-      }
-      heatmapOverlay = new BMapLib.HeatmapOverlay({
-        "radius":20,
-        'opacity': 0.7,
-        'gradient': {0.5:'#94a5cb', 0.8:'#5d79b7', 1:'#4463aa'}
-      });
-      map.addOverlay(heatmapOverlay);
-      heatmapOverlay.setDataSet({data:points,max:1});
-      //判断浏览区是否支持canvas
-      function isSupportCanvas(){
-        var elem = document.createElement('canvas');
-        return !!(elem.getContext && elem.getContext('2d'));
-      }
-
       //定位到当前位置
-      // var mk;
-      // var geolocation = new BMap.Geolocation();
-      // geolocation.getCurrentPosition(function(r){
-      //   if(this.getStatus() == BMAP_STATUS_SUCCESS){
-      //     var mk = new BMap.Marker(r.point);
-      //     map.addOverlay(mk);
-      //     map.panTo(r.point);
-      //     showInfo(r);  //自定定位并显示当前区域
-      //   }
-      //   else {
-      //     alert('failed'+this.getStatus());
-      //   }
-      // },{enableHighAccuracy: true})
+      var mk;
+      var geolocation = new BMap.Geolocation();
+      geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+          var mk = new BMap.Marker(r.point);
+          map.addOverlay(mk);
+          map.panTo(r.point);
+          showInfo(r);  //自定定位并显示当前区域
+        }
+        else {
+          alert('failed'+this.getStatus());
+        }
+      },{enableHighAccuracy: true})
 
-      //console.log(map.getOverlays());
+      console.log(map.getOverlays());
 
       //获取点击位置的解析区域
       var gc = new BMap.Geocoder();
@@ -100,8 +80,9 @@
         var pt = e.point;
         gc.getLocation(pt, function(rs){
           var addComp = rs.addressComponents;
-          map.clearOverlays();
-          map.addOverlay(new BMap.Marker(pt));
+          maker = new BMap.Marker(pt);
+          map.removeOverlay(maker);
+          map.addOverlay(maker);
           $("#address").text(addComp.district);
           $.ajax({
             type: "GET",
@@ -161,6 +142,32 @@
         });
         local.search(myValue);
       }
+
+      $(".leida").click(function(){
+        //地图第一步加载热力图
+        var points = JSON.parse(gon.points);
+
+        if(!isSupportCanvas()){
+          alert('热力图目前只支持有canvas支持的浏览器,您所使用的浏览器不能使用热力图功能~')
+        }
+        heatmapOverlay = new BMapLib.HeatmapOverlay({
+          "radius":20,
+          'opacity': 0.7,
+          'gradient': {0.5:'#94a5cb', 0.8:'#5d79b7', 1:'#4463aa'}
+        });
+        heatmapOverlay.setDataSet({data:points, max:1});
+        //判断浏览区是否支持canvas
+        function isSupportCanvas(){
+          var elem = document.createElement('canvas');
+          return !!(elem.getContext && elem.getContext('2d'));
+        }
+        $(this).toggleClass("active");
+        if($(this).attr('class') == "leida"){
+          map.addOverlay(heatmapOverlay);
+        } else {
+          map.removeOverlay(heatmapOverlay);
+        }
+      })
 
       //地图的高度等于屏幕的高度
       var c_Height=($(document).height() - 171) + "px";

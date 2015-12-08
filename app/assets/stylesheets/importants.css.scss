@@ -78,9 +78,11 @@
     position: absolute;
     top: 11rem;
     right: 2rem;
-    img {
-      width: 100%;
-      height: 100%;
+    background: image-url("leida.png") no-repeat 0 0;
+    background-size: 100% 100%;
+    &.active {
+      background: image-url("leida-active.png") no-repeat 0 0;
+      background-size: 100% 100%;
     }
   }
 }
