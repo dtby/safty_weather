@@ -124,7 +124,7 @@
     height: 4rem;
     display: block;
     position: absolute;
-    top: 11rem;
+    top: 12rem;
     right: 2rem;
     background: image-url("leida.png") no-repeat 0 0;
     background-size: 100% 100%;
@@ -173,14 +173,18 @@
   .warning-btn, .typhoon-list {
     position: absolute;
     left: 1rem;
-    bottom: 5rem;
+    bottom: 6rem;
     z-index: 9;
+  }
+  .warning-btn img {
+    width: 50%;
+    height: 50%;
   }
   .typhoon-list {
     background: #fff;
     border: 2px #cd979a solid;
     border-radius: .5rem;
-    padding: 1rem 2rem;
+    padding: .5rem 1rem;
     display: none;
     li {
       color: #ef402b;
