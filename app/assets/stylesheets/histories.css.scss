@@ -37,7 +37,7 @@
 }
 
 .histories_result {
-  padding: 0 10%;
+  padding: 1rem 10%;
   background: $main-color;
   .logo {
     text-align: center;
@@ -71,13 +71,24 @@
     background: $white-color;
   }
   .tips {
-    text-align: center;
     color: $white-color;
-    font-size: 1.6rem;
-    line-height: 48px;
+    p {
+      font-size: 1.4rem;
+      line-height: 1.8rem;
+      span {
+        font-size: 1.6rem;
+      }
+    }
   }
 }
 .histories_index {
+//  .BMap_center {
+//    height: 64px!important;
+//    background: red!important;
+//  }
+//  .BMap_bottom,.BMap_top {
+//    background: red!important;
+//  }
   .searchBar {
     position: absolute;
     left: 5%;
@@ -101,7 +112,7 @@
     }
     select {
       background: $white-color;
-      width: 90%;
+      width: 100%;
       padding: 5px;
       font-size: 16px;
       line-height: 1;
@@ -110,6 +121,27 @@
       height: 60px;
       padding-left: 16px;
       -webkit-appearance: none;
+    }
+    .styled-input {
+      width: 100%;
+      height: 6rem;
+      line-height: 6rem;
+      overflow: hidden;
+      label {
+        width: 6rem;
+        margin: .5rem;
+        display: block;
+        float: left;
+      }
+      input {
+        width: 90%;
+        padding: 1rem 0;
+        margin: .8rem 0;
+        border: 0;
+        border-bottom: solid 1px $gray-color;
+        float: left;
+        display: block;
+      }
     }
     .btns {
       margin-top: 24px;
