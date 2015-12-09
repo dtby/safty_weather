@@ -17,18 +17,20 @@
 <div id="r-result"></div>
 
 <%= link_to "#", scenes_path, id: "getWeatherData", remote: true, style: "display:none;", 'data-url': scenes_path %>
-
-<div class="weather-info">
-  <table>
-    <tr>
-      <th>地址</th>
-      <td id="address">上海市</td>
-    </tr>
-  </table>
-  <div id="weather-info">
-    <%= render "weather_info"%>
+<div class="tipsContent">
+  <div class="weather-info">
+    <table style="width: 100%;">
+      <tr>
+        <th class="text-left">地&emsp;&emsp;&emsp;址</th>
+        <td id="address">上海市</td>
+      </tr>
+    </table>
+    <div id="weather-info">
+      <%= render "weather_info"%>
+    </div>
   </div>
 </div>
+
 <div id="result"></div>
 <% content_for :scripts do %>
   <%= javascript_include_tag baidu_api(ENV['baidukey']) %>
@@ -46,8 +48,9 @@
       if(this.getStatus() == BMAP_STATUS_SUCCESS){
         gc.getLocation(r.point, function(rs){
           var addComp = rs.addressComponents;
-          var sContent = "<div style='background: #ef402b; color: #fff;'>您现在的位置是<br><div>";
-          var infoWindow = new BMap.InfoWindow(sContent + addComp.district + addComp.street + addComp.streetNumber);
+          var sContent = "<div style='color: #eb5405; font-weight: bold;'>您现在的位置是：<br></div>";
+          var position = addComp.district + addComp.street + addComp.streetNumber;
+          var infoWindow = new BMap.InfoWindow(sContent + position);
           map.openInfoWindow(infoWindow,new BMap.Point(r.point.lng, r.point.lat));
         });
       }
@@ -77,7 +80,7 @@
         map.clearOverlays();  //删除旧遮盖物
         map.addOverlay(new BMap.Marker(pt))  //添加新的遮盖物
         $("#getWeatherData").click();
-        $("#address").text(addComp.district + " " + addComp.street);
+        $("#address").text(addComp.district);
       });
     }
     map.addEventListener("click", showInfo);
