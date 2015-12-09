@@ -8,10 +8,6 @@
   <div id="allmap"></div>
 </div>
 
-<div id="data">
-  <%= render partial: "data", locals: {typhoon_recorder: @typhoon_recorder}%>
-</div>
-
 <div class="typhoonInfo">
   <div class="typhoon-info">
     <table>
@@ -23,28 +19,15 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <th>中心风力</th>
-        <td>23级</td>
-      </tr>
-      <tr>
-        <th>七级风圈</th>
-        <td>300km</td>
-      </tr>
-      <tr>
-        <th>十级风圈</th>
-        <td>500km</td>
-      </tr>
-      <tr>
-        <th>距离上海</th>
-        <td>55.13km</td>
-      </tr>
+    </table>
+    <table id="data">
+      <%= render partial: "data", locals: {typhoon_recorder: @typhoon_recorder}%>
     </table>
   </div>
   <%= link_to "javascript:void(0);", class: "riskBtn" do %>
     <span>风险防范措施</span>
     <%= image_tag("hand.png")%>
-  <% end -%>
+  <% end %>
 </div>
 
 <!-- 模态框 -->
@@ -56,66 +39,8 @@
   </div>
 </div>
 
-<div class="typhoon-list">
-  <ul>
-    <li>
-      <i class="circle black"></i>
-      超强台风
-    </li>
-    <li>
-      <i class="circle purple"></i>
-      强台风
-    </li>
-    <li>
-      <i class="circle red"></i>
-      台风
-    </li>
-    <li>
-      <i class="circle orange"></i>
-      强热带风暴
-    </li>
-    <li>
-      <i class="circle yellow"></i>
-      热带风暴
-    </li>
-    <li>
-      <i class="circle blue"></i>
-      热带低压
-    </li>
-  </ul>
-</div>
-
-<% content_for :scripts do %>
-  <script type="text/javascript">
-    $(function(){
-      ajaxReq();
-      $('#typhoonid').change(function(){
-        ajaxReq();
-      });
-      function ajaxReq(){
-        $.ajax({
-          url: "/importants/get_typhoon",
-          type: 'GET',
-          data: {typhoonid: $(this).val()}
-        })
-      }
-      //风险防范措施模态框
-      $(".riskBtn").click(function(e){
-        $(".modal-bg").show(300);
-        $(".modal-content").show(300);
-        e.stopPropagation();
-      });
-      $('body').click(function(e){
-        $(".modal-bg").hide();
-        $(".modal-content").hide();
-      });
-
-      //风险防范措施按钮宽度等于降水信息宽度
-      var b_width = $(".typhoonInfo").width() + "px";
-      $(".riskBtn").css("width", b_width);
-    });
-  </script>
-<% end %>
+<!-- 台风预警标示 -->
+<%= render "typhoon_symbol"%>
 
 <style type="text/css">
   .mapbar {

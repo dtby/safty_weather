@@ -161,7 +161,7 @@
     background: #eb5405;
     border: 2px #cd979a solid;
     border-radius: .5rem;
-    padding: 1rem 2rem;
+    padding: 1rem .5rem;
     table {
       color: $white-color;
       td {
@@ -170,15 +170,18 @@
     }
   }
 
-  .typhoon-list {
+  .warning-btn, .typhoon-list {
     position: absolute;
     left: 1rem;
     bottom: 5rem;
     z-index: 9;
+  }
+  .typhoon-list {
     background: #fff;
     border: 2px #cd979a solid;
     border-radius: .5rem;
     padding: 1rem 2rem;
+    display: none;
     li {
       color: #ef402b;
       height: 2rem;
