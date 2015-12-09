@@ -36,4 +36,10 @@ module ApplicationHelper
     }
   end
 
+  #区县名称对应类
+  def area_hash
+    {
+      '嘉定' => "jiading"
+    }
+  end
 end

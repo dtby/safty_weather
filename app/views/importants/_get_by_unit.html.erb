@@ -1,7 +1,7 @@
-<div class="modal-title"><%= unit %>黄色暴雨预警</div>
+<div class="modal-title"><%= unit %>预警信息</div>
 <div class="modal-body">
-  <% if @warning_data.present? %>
-    <% @warning_data[0..2].each do |data|%>
+  <% if @area_warning_data.present? %>
+    <% @area_warning_data[0..2].each do |data|%>
       <div class="text-center">
         <%= image_tag(Weather.get_image_pic(data['type'], data['level'])) %>
       </div>

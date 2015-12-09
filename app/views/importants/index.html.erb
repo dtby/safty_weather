@@ -30,6 +30,94 @@
   </div>
 
   <div class="mainMap">
+    <% jiading_warnings = Weather.get_area_warning_data("嘉定")['data'] %>
+    <% if jiading_warnings.present? %>
+      <div class="areaWarning jiading">
+        <% jiading_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% baoshan_warnings = Weather.get_area_warning_data("宝山")['data'] %>
+    <% if baoshan_warnings.present? %>
+      <div class="areaWarning baoshan">
+        <% baoshan_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% chongming_warnings = Weather.get_area_warning_data("崇明")['data'] %>
+    <% if chongming_warnings.present? %>
+      <div class="areaWarning chongming">
+        <% chongming_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% shanghai_warnings = Weather.get_warning_data['data'] %>
+    <% if shanghai_warnings.present? %>
+      <div class="areaWarning shanghai">
+        <% shanghai_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% pudong_warnings = Weather.get_area_warning_data("浦东")['data'] %>
+    <% if pudong_warnings.present? %>
+      <div class="areaWarning pudong">
+        <% pudong_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% minhang_warnings = Weather.get_area_warning_data("闵行")['data'] %>
+    <% if minhang_warnings.present? %>
+      <div class="areaWarning minhang">
+        <% minhang_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% fengxian_warnings = Weather.get_area_warning_data("奉贤")['data'] %>
+    <% if fengxian_warnings.present? %>
+      <div class="areaWarning fengxian">
+        <% fengxian_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
+    <% songjiang_warnings = Weather.get_area_warning_data("松江")['data'] %>
+    <% if songjiang_warnings.present? %>
+      <div class="areaWarning songjiang">
+        <% songjiang_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+    <% jinshan_warnings = Weather.get_area_warning_data("金山")['data'] %>
+    <% if jinshan_warnings.present? %>
+      <div class="areaWarning pudong">
+        <% jinshan_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+    <% qingpu_warnings = Weather.get_area_warning_data("青浦")['data'] %>
+    <% if qingpu_warnings.present? %>
+      <div class="areaWarning pudong">
+        <% qingpu_warnings[0..1].each do |data|%>
+          <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
+        <% end %>
+       </div>
+    <% end %>
+
     <%= image_tag("shanghai-bg.gif", usemap: "#areamap", style: "width: 980;") %>
     <map name="areamap" id="areamap" data-url=<%= get_by_unit_importants_path %>>
       <!-- 嘉定区 -->
