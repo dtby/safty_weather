@@ -43,6 +43,12 @@ a:link, a:hover, a:visited, a:active {
   text-align: left;
 }
 
+//进度条
+#nprogress .bar {
+  background: $main-color!important;
+  height: .3rem!important;
+}
+
 footer {
   padding: 5px 0;
   background: $footer-bg-color;
