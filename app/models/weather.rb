@@ -15,7 +15,6 @@ module Weather
   def self.get_rain_data
     rain = self.get_data_from_url(RAIN_URL).reject{|x| x['data'] == 0.0}
     rain
-    #$redis.set('rain', rain.to_json)
   end
 
   #降水分析

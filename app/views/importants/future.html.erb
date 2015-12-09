@@ -65,10 +65,10 @@
       heatmapOverlay = new BMapLib.HeatmapOverlay({
         "radius":20,
         'opacity': 0.7,
-        'gradient': {0.5:'#94a5cb', 0.8:'#5d79b7', 1:'#4463aa'}
+        'gradient': {0.01:'#94a5cb',0.05:'#94a5cb',0.1:'#94a5cb',0.41:'#94a5cb',0.5:'#94a5cb', 0.8:'#5d79b7', 1.0:'#4463aa'}
       });
       map.addOverlay(heatmapOverlay);
-      heatmapOverlay.setDataSet({data:points, max:1});
+      heatmapOverlay.setDataSet({data:points, max:10});
       heatmapOverlay.hide();  //默认雷达云图隐藏
       //判断浏览区是否支持canvas
       function isSupportCanvas(){
@@ -93,14 +93,16 @@
           var mk = new BMap.Marker(r.point);
           map.addOverlay(mk);
           map.panTo(r.point);
-          showInfo(r);  //自定定位并显示当前区域
+          $.ajax({
+            type: "GET",
+            url: "/importants/get_rain",
+            data: {lng: r.point.lng, lat: r.point.lat}
+          });
         }
         else {
           alert('failed'+this.getStatus());
         }
       },{enableHighAccuracy: true})
-
-      console.log(map.getOverlays());
 
       //获取点击位置的解析区域
       var gc = new BMap.Geocoder();
@@ -109,8 +111,7 @@
         gc.getLocation(pt, function(rs){
           var addComp = rs.addressComponents;
           maker = new BMap.Marker(pt);
-          map.removeOverlay(maker);
-          map.addOverlay(maker);
+          //map.addOverlay(maker);
           $("#address").text(addComp.district);
           $.ajax({
             type: "GET",

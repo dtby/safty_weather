@@ -25,7 +25,8 @@
     <td>暂无数据</td>
   </tr>
 <% end %>
-<div class="dataArray" data-url=<%= typhoon_recorder.to_json %>></div>
+<div class="dataArray" data-url=<%= typhoon_recorders.to_json %>></div>
+<div class="data" data-url=<%= typhoon_recorder.to_json %>></div>
 <% content_for :scripts do %>
   <%= javascript_include_tag baidu_api(ENV['baidukey']), 'data-turbolinks-track' => false %>
   <%= javascript_include_tag "http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", 'data-turbolinks-track' => false %>
@@ -33,25 +34,27 @@
 
   <script type="text/javascript">
     $(function(){
-      var map = new BMap.Map("allmap");
-      //台风路径画线
-      var recorder = $(".dataArray").data('url');
+      //初始化地图
+      var recorders = $(".dataArray").data('url');
+      var recorder = $(".data").data('url');
 
-      //添加台风覆盖图,台风图标的位置为当前日期的台风
-      var pt = new BMap.Point(recorder.lon, recorder.lat);
-      map.centerAndZoom(point, 3);  // 初始化地图,设置中心点坐标和地图级别
+      var map = new BMap.Map("allmap");
+      var point = new BMap.Point(recorder.lon, recorder.lat);
+      map.centerAndZoom(point, 6);  // 初始化地图,设置中心点坐标和地图级别
       map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
+
+      //台风路径画
       var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
       var myIcon = new BMap.Icon(image, new BMap.Size(30,30));
-      var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+      var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
       map.addOverlay(marker2);
 
       var points = new Array();
-      for(var i=0; i < recorder.length; i++) {
-        var point = new BMap.Point(recorder[i].lon, recorder[i].lat);
+      for(var i=0; i < recorders.length; i++) {
+        var point = new BMap.Point(recorders[i].lon, recorders[i].lat);
         points.push(point);
       }
-      var curve = new BMapLib.CurveLine(points, {strokeColor:"black", strokeWeight:3, strokeOpacity:0.5}); //创建弧线对象
+      var curve = new BMapLib.CurveLine(points, {strokeColor:"black", strokeWeight:3, strokeOpacity:0}); //创建弧线对象
       map.addOverlay(curve); //添加到地图中
 
       //根据台风坐标创建圆形

@@ -21,7 +21,7 @@
       </tr>
     </table>
     <table id="data">
-      <%= render partial: "data", locals: {typhoon_recorder: @typhoon_recorder}%>
+      <%= render partial: "data", locals: {typhoon_recorder: @typhoon_recorder, typhoon_recorders: @typhoon_recorders}%>
     </table>
   </div>
   <%= link_to "javascript:void(0);", class: "riskBtn" do %>
