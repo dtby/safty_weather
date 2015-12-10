@@ -73,7 +73,7 @@ footer {
         background: image-url("svg/home.svg") no-repeat 0 0;
       }
       &.important {
-        background: image-url("svg/important.svg") no-repeat 0 0;
+        background: image-url("svg/important.svg") no-repeat -4px -6px;
       }
       &.search {
         background: image-url("svg/search.svg") no-repeat 0 0;
@@ -92,7 +92,7 @@ footer {
           background: image-url("svg/home-active.svg") no-repeat 0 0;
         }
         &.important {
-          background: image-url("svg/important-active.svg") no-repeat 0 0;
+          background: image-url("svg/important-active.svg") no-repeat -4px -6px;
         }
         &.search {
           background: image-url("svg/search-active.svg") no-repeat 0 0;
