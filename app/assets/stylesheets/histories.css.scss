@@ -84,9 +84,8 @@
 .histories_index {
   .searchBar {
     position: absolute;
-    left: 5%;
-    right: 5%;
-    top: 6rem;
+    left: 0;
+    right: 0;
     border-radius: 5px;
     background: #fff;
     .title {
@@ -95,25 +94,10 @@
       text-align: center;
       color: $white-color;
       background: $main-color;
+      border-radius: 5px 5px 0 0;
     }
-    .styled-select {
-      width: 100%;
-      height: 56px;
-      overflow: hidden;
-      background: image-url("svg/sanjiao.svg") no-repeat right #fff;
-      border-bottom: solid 1px $gray-color;
-    }
-    select {
-      background: $white-color;
-      width: 100%;
-      padding: 5px;
-      font-size: 16px;
-      line-height: 1;
-      border: 0;
-      border-radius: 0;
-      height: 60px;
-      padding-left: 16px;
-      -webkit-appearance: none;
+    form {
+      padding: 0 1rem;
     }
     .styled-input {
       width: 100%;
@@ -127,11 +111,24 @@
         float: left;
       }
       input {
-        width: 90%;
-        padding: 1rem 0;
-        margin: .8rem 0;
-        border: 0;
+        width: 70%;
+        border: none;
+        font-size: 16px;
+        padding: .5rem 0 .1rem 0;
+        margin: 1.6rem 0;
         border-bottom: solid 1px $gray-color;
+        float: left;
+        text-align: center;
+        display: block;
+      }
+      select {
+        width: 70%;
+        border: none 0;
+        height: 44px;
+        margin: .6rem 0;
+        border: solid 1px #fff;
+        border-bottom: solid 1px #aeaeae;
+        background: #fff;
         float: left;
         display: block;
       }
@@ -139,11 +136,11 @@
     .btns {
       margin-top: 24px;
       overflow: hidden;
-      padding: 0 10px 20px;
+      padding: 0 6% 2rem 6%;
     }
     .submit, .cancel {
       color: $main-color;
-      height: 34px;
+      height: 30px;
       width: 35%;
       border: solid 1px $main-color;
       border-radius: 5px;

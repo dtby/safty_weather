@@ -49,6 +49,7 @@
 <% content_for :scripts do %>
   <%= javascript_include_tag baidu_api(ENV['baidukey']), 'data-turbolinks-track' => false %>
   <%= javascript_include_tag "http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag "http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js", 'data-turbolinks-track' => false %>
   <script type="text/javascript">
     $(function(){
       //初始化地图
@@ -56,6 +57,14 @@
       var point = new BMap.Point(121.48,31.22);
       map.centerAndZoom(point, 8);  // 初始化地图,设置中心点坐标和地图级别
       map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
+
+      //设置上海经纬度范围，左下角坐标和右上角坐标
+      // var b = new BMap.Bounds(new BMap.Point(120.51, 30.40),new BMap.Point(122.12, 31.53));
+      // try {
+      //   BMapLib.AreaRestriction.setBounds(map, b);
+      // } catch (e) {
+      //   alert(e);
+      // }
 
       var points = JSON.parse(gon.points);
 
@@ -75,15 +84,6 @@
         var elem = document.createElement('canvas');
         return !!(elem.getContext && elem.getContext('2d'));
       }
-
-      $(".leida").click(function(){
-        $(this).toggleClass("active");
-        if($(this).attr('class') == "leida"){
-          heatmapOverlay.hide();
-        }else{
-          heatmapOverlay.show();
-        }
-      })
 
       //定位到当前位置
       var mk;
@@ -172,9 +172,19 @@
         local.search(myValue);
       }
 
+      //雷达按钮效果
+      $(".leida").click(function(){
+        $(this).toggleClass("active");
+        if($(this).attr('class') == "leida"){
+          heatmapOverlay.hide();
+        }else{
+          heatmapOverlay.show();
+        }
+      })
+
       //地图的高度等于屏幕的高度
       var c_Height=($(document).height() - 171) + "px";
-      $(".mapbar").css("height",c_Height);
+      $(".mapbar").css("height",c_Height).css("overflow", "hidden");
 
       //风险防范措施按钮宽度等于降水信息宽度
       var b_width = $(".weather-info").width() + "px";
@@ -182,8 +192,8 @@
 
       //风险防范措施模态框
       $(".riskBtn").click(function(e){
-        $(".modal-bg").slideDown(300);
-        $(".modal-content").slideDown(300);
+        $(".modal-bg").slideDown("slow");
+        $(".modal-content").slideDown("slow");
         e.stopPropagation();
       });
       $('body').click(function(e){

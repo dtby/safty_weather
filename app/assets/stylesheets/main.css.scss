@@ -116,6 +116,16 @@ footer {
   background: #000;
   opacity: 0.7;
   z-index: 1;
+  .shutDown {
+    width: 30px;
+    height: 30px;
+    right: 1rem;
+    top: 1rem;
+    position: absolute;
+    z-index: 2333;
+    display: block;
+    overflow: hidden;
+  }
 }
 
 .modal-content {

@@ -15,22 +15,25 @@
 </div>
 
 <!-- 模态框 -->
-<div class="modal-bg"></div>
+<div class="modal-bg">
+  <%= link_to image_tag("svg/cuo.svg"), "javascript:void(0);", class: "shutDown"  %>
+</div>
 <div class="modal-content">
   <div class="searchBar">
     <div class="title">历史查询</div>
     <%= form_tag result_histories_path, method: :get do %>
       <div class="styled-input">
         <label for="">开始时间</label>
-        <input type="date">
+        <input type="date" id="beginDate">
       </div>
       <div class="styled-input">
         <label for="">结束时间</label>
-        <input type="date" placeholder="开始时间">
+        <input type="date" id="endDate">
       </div>
-      <div class="styled-select">
+      <div class="styled-input">
+        <label for="">灾害类型</label>
         <select name="" id="">
-          <option value="">灾害类型</option>
+          <option value=""></option>
         </select>
       </div>
       <div class="btns">
@@ -44,7 +47,6 @@
 <% content_for :scripts do %>
   <%= javascript_include_tag baidu_api(ENV['baidukey']) %>
   <script type="text/javascript">
-
     //初始化地图
     var map = new BMap.Map("allmap");
     var point = new BMap.Point(121.487899,31.249162);
@@ -70,16 +72,6 @@
         alert('failed'+this.getStatus());
       }
     },{enableHighAccuracy: true})
-
-    function searchModal(){
-      $(".modal-bg").show(300);
-      $(".modal-content").show(300);
-    }
-
-    $('body').click(function(e){
-      $(".modal-bg").hide();
-      $(".modal-content").hide();
-    });
 
     function hideinfowindow(){
       map.clearOverlays();
@@ -154,6 +146,34 @@
       });
       local.search(myValue);
     }
+
+    //模态框响应
+    function searchModal(){
+      $(".modal-bg").show(300);
+      $(".modal-content").show(300);
+    }
+    function shutModal() {
+      $(".modal-bg").hide();
+      $(".modal-content").hide();
+    }
+    //点击x号关闭模态框
+    $('.shutDown').click(function(){
+      shutModal()
+    });
+    //点击取消查询关闭模态框
+    $("input.cancel").click(function(){
+      shutModal()
+      return false;
+    })
+
+    //时间输入框默认填充当前日期
+    Date.prototype.toDateInputValue = (function() {
+      var local = new Date(this);
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+      return local.toJSON().slice(0,10);
+    });
+    $('#beginDate').val(new Date().toDateInputValue());
+    $('#endDate').val(new Date().toDateInputValue());
 
     //地图的高度等于屏幕的高度
     var c_Height=($(document).height() - 116) + "px";

@@ -60,5 +60,3 @@ gem 'gon', '~> 6.0'
 #redis服务
 gem "redis", "~> 3.0.1"
 
-#进度条
-gem 'nprogress-rails'

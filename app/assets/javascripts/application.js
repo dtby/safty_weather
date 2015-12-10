@@ -12,19 +12,4 @@
 //
 //= require jquery
 //= require jquery.turbolinks
-//= require nprogress
-//= require nprogress-turbolinks
 //= require jquery_ujs
-
-$(function(){
-  $('body').show();
-  NProgress.start();
-  setTimeout(function() { NProgress.done(); $('.fade').removeClass('out'); }, 300);
-});
-
-$(document).on('page:fetch', function() {
-  $("#spin").show();
-});
-$(document).on('page:change', function() {
-  $("#spin").hide();
-});
