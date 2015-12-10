@@ -52,13 +52,18 @@ class ImportantsController < ApplicationController
     #单个台风,获取单个台风路径数据列表的第一个，待确认
     @typhoon_recorder = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data'][0]
     @typhoon_recorders = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data']
-    gon.typhoon_recorder = @typhoon_recorder
-    gon.typhoon_recorders = @typhoon_recorders
+    gon.typhoon_recorder = @typhoon_recorder.to_json
+    gon.typhoon_recorders = @typhoon_recorders.to_json
   end
 
   #单个台风
   def get_typhoon
     @typhoon_recorder = Weather.get_typhoon_data(params[:typhoonid])['data'][0]
+    @typhoon_recorders = Weather.get_typhoon_data(params[:typhoonid])['data']
+    gon.typhoon_recorder = @typhoon_recorder.to_json
+    gon.typhoon_recorders = @typhoon_recorders.to_json
+    p "xxxxxxxxxxx"
+    p @typhoon_recorders
     #gon.typhoon_recorder = @typhoon_recorder.to_json
     respond_to do |format|
       format.js

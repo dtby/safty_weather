@@ -33,74 +33,72 @@
   <%= javascript_include_tag "http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js", 'data-turbolinks-track' => false %>
 
   <script type="text/javascript">
-    $(function(){
-      //初始化地图
-      var recorders = $(".dataArray").data('url');
-      var recorder = $(".data").data('url');
+    //初始化地图
+    var recorders = $(".dataArray").data('url');
+    var recorder = $(".data").data('url');
 
-      var map = new BMap.Map("allmap");
-      var point = new BMap.Point(recorder.lon, recorder.lat);
-      map.centerAndZoom(point, 6);  // 初始化地图,设置中心点坐标和地图级别
-      map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
+    var map = new BMap.Map("allmap");
+    var mapPoint = new BMap.Point(116.2317, 39.5427);
+    map.centerAndZoom(mapPoint, 5);  // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
 
-      //台风路径画
-      var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
-      var myIcon = new BMap.Icon(image, new BMap.Size(30,30));
-      var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
-      map.addOverlay(marker2);
+    //台风路径画
+    var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
+    var myIcon = new BMap.Icon(image, new BMap.Size(30,30));
+    var point = new BMap.Point(recorder.lon, recorder.lat);
+    var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+    map.addOverlay(marker2);
 
-      var points = new Array();
-      for(var i=0; i < recorders.length; i++) {
-        var point = new BMap.Point(recorders[i].lon, recorders[i].lat);
-        points.push(point);
-      }
-      var curve = new BMapLib.CurveLine(points, {strokeColor:"black", strokeWeight:3, strokeOpacity:0}); //创建弧线对象
-      map.addOverlay(curve); //添加到地图中
+    var points = new Array();
+    for(var i=0; i < recorders.length; i++) {
+      var pt = new BMap.Point(recorders[i].lon, recorders[i].lat);
+      points.push(pt);
+    }
+    var curve = new BMapLib.CurveLine(points, {strokeColor:"#eb5405", strokeWeight:4, strokeOpacity:0}); //创建弧线对象
+    map.addOverlay(curve); //添加到地图中
 
-      //根据台风坐标创建圆形
-      for(var i = 0; i < points.length; i++) {
-        console.log(points[i].lng, points[i].lat)
-        c_point = new BMap.Point(points[i].lng, points[i].lat);
-        var circle = new BMap.Circle(new BMap.Point(points[i].lng, points[i].lat), 12000, {strokeColor: "black", strokeWeight: 2, strokeOpacity: 0.5});
-        map.addOverlay(circle);
-      }
+    //根据台风坐标创建圆形
+    for(var i = 0; i < points.length; i++) {
+      c_point = new BMap.Point(points[i].lng, points[i].lat);
+      var circle = new BMap.Circle(new BMap.Point(points[i].lng, points[i].lat), 20000, {strokeColor: "#666", strokeWeight: 3, strokeOpacity: 0.5});
+      map.addOverlay(circle);
+    }
 
-      $('#typhoonid').change(function(){
-        $.ajax({
-          url: "/importants/get_typhoon",
-          type: 'GET',
-          data: {typhoonid: $(this).val()}
-        })
-      });
-
-      //风险防范措施模态框
-      $(".riskBtn").click(function(e){
-        $(".modal-bg").slideDown(300);
-        $(".modal-content").slideDown(300);
-        e.stopPropagation();
-      });
-      $('body').click(function(e){
-        $(".modal-bg").slideUp();
-        $(".modal-content").slideUp();
-      });
-
-      //风险防范措施按钮宽度等于降水信息宽度
-      var b_width = $(".typhoonInfo").width() + "px";
-      $(".riskBtn").css("width", b_width);
-
-      //台风示意图显示隐藏
-      $(".warning-btn").click(function(e){
-        $(".typhoon-list").slideToggle();
-        if($(this).css("bottom") == "230px") {
-          $(this).animate({"bottom": "60px"});
-        } else {
-          $(this).animate({"bottom": "230px"});
-        }
+    $('#typhoonid').change(function(){
+      $.ajax({
+        url: "/importants/get_typhoon",
+        type: 'GET',
+        data: {typhoonid: $(this).val()}
       })
-
-      //地图的高度等于屏幕的高度
-      var c_Height=($(document).height() - 111) + "px";
-      $(".mapbar").css("height",c_Height);
     });
+
+    //风险防范措施模态框
+    $(".riskBtn").click(function(e){
+      $(".modal-bg").slideDown('fast');
+      $(".modal-content").slideDown('slow');
+      e.stopPropagation();
+    });
+    $('body').click(function(e){
+      $(".modal-bg").slideUp();
+      $(".modal-content").slideUp();
+    });
+
+    //风险防范措施按钮宽度等于降水信息宽度
+    var b_width = $(".typhoonInfo").width() + "px";
+    $(".riskBtn").css("width", b_width);
+
+    //台风示意图显示隐藏
+    $(".warning-btn").click(function(e){
+      $(".typhoon-list").slideToggle();
+      if($(this).css("bottom") == "230px") {
+        $(this).animate({"bottom": "60px"});
+      } else {
+        $(this).animate({"bottom": "230px"});
+      }
+    })
+
+    //地图的高度等于屏幕的高度
+    var c_Height=($(document).height() - 111) + "px";
+    $(".mapbar").css("height",c_Height);
   </script>
 <% end %>

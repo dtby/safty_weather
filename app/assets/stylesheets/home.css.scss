@@ -13,6 +13,32 @@
       color: $white-color;
       text-align: center;
       margin: 30px 0;
+//      @media only screen and (max-device-height: 480px){
+//        img {
+//          width: 3.4rem;
+//          height: 3.4rem;
+//        }
+//      }
+//      @media screen and (max-device-height: 639px){
+//        img {
+//          width: 10.7rem;
+//          height: 10.7rem;
+//        }
+//      }
+//      @media only screen and (min-device-height: 640px) and (max-device-height: 735px) {
+//        img {
+//          width: 15rem;
+//          height: 15rem;
+//          margin: .8rem 0;
+//        }
+//      }
+//      @media only screen and (min-device-width: 414px) and (min-device-height: 736px) {
+//        img {
+//          width: 15.5rem;
+//          height: 15.5rem;
+//          margin: 4.5rem 0;
+//        }
+//      }
       p {
         margin: 15px 0;
       }

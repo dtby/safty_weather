@@ -91,7 +91,6 @@ GEM
     mysql2 (0.3.20)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    nprogress-rails (0.1.6.7)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -176,7 +175,6 @@ DEPENDENCIES
   jquery-turbolinks
   multi_json
   mysql2 (~> 0.3.18)
-  nprogress-rails
   rails (= 4.2.4)
   redis (~> 3.0.1)
   rmmseg-cpp
