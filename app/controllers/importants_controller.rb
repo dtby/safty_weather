@@ -52,6 +52,8 @@ class ImportantsController < ApplicationController
     #单个台风,获取单个台风路径数据列表的第一个，待确认
     @typhoon_recorder = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data'][0]
     @typhoon_recorders = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data']
+    gon.typhoon_recorder = @typhoon_recorder
+    gon.typhoon_recorders = @typhoon_recorders
   end
 
   #单个台风

@@ -75,13 +75,13 @@
 
       //风险防范措施模态框
       $(".riskBtn").click(function(e){
-        $(".modal-bg").show(300);
-        $(".modal-content").show(300);
+        $(".modal-bg").slideDown(300);
+        $(".modal-content").slideDown(300);
         e.stopPropagation();
       });
       $('body').click(function(e){
-        $(".modal-bg").hide();
-        $(".modal-content").hide();
+        $(".modal-bg").slideUp();
+        $(".modal-content").slideUp();
       });
 
       //风险防范措施按钮宽度等于降水信息宽度
@@ -91,10 +91,10 @@
       //台风示意图显示隐藏
       $(".warning-btn").click(function(e){
         $(".typhoon-list").slideToggle();
-        if($(this).css("bottom") == "240px") {
+        if($(this).css("bottom") == "230px") {
           $(this).animate({"bottom": "60px"});
         } else {
-          $(this).animate({"bottom": "240px"});
+          $(this).animate({"bottom": "230px"});
         }
       })
 

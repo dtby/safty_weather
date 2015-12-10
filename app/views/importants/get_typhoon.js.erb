@@ -1,1 +1,1 @@
-$("#data").html("<%= j(render partial: 'data', locals: {typhoon_recorder: @typhoon_recorder, typhoon_recorders: @typhoon_recorders})%>")
+$("#data").replaceWith("<%= j(render partial: 'data', locals: {typhoon_recorder: @typhoon_recorder, typhoon_recorders: @typhoon_recorders})%>")

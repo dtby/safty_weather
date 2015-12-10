@@ -182,13 +182,13 @@
 
       //风险防范措施模态框
       $(".riskBtn").click(function(e){
-        $(".modal-bg").show(300);
-        $(".modal-content").show(300);
+        $(".modal-bg").slideDown(300);
+        $(".modal-content").slideDown(300);
         e.stopPropagation();
       });
       $('body').click(function(e){
-        $(".modal-bg").hide();
-        $(".modal-content").hide();
+        $(".modal-bg").slideUp();
+        $(".modal-content").slideUp();
       });
     });
   </script>
