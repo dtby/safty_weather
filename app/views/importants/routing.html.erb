@@ -20,13 +20,13 @@
         </td>
       </tr>
     </table>
-    <table id="data">
+    <table id="data" style="color: #fff;"  >
       <%= render partial: "data", locals: {typhoon_recorder: @typhoon_recorder, typhoon_recorders: @typhoon_recorders}%>
     </table>
   </div>
   <%= link_to "javascript:void(0);", class: "riskBtn" do %>
     <span>风险防范措施</span>
-    <%= image_tag("hand.png")%>
+    <%= image_tag("svg/shou.svg")%>
   <% end %>
 </div>
 

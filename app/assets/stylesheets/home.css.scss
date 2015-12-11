@@ -2,7 +2,7 @@
 
 .home_index {
   .topbar {
-    padding: 1%;
+    padding: 4rem 0;
     background: $home-topbar-color;
     .title {
       color: $white-color;
@@ -13,6 +13,10 @@
       color: $white-color;
       text-align: center;
       margin: 30px 0;
+      img {
+        width: 10rem;
+        height: 10rem;
+      }
 //      @media only screen and (max-device-height: 480px){
 //        img {
 //          width: 3.4rem;
@@ -72,15 +76,21 @@
         background: #701419;
       }
       ul {
-        padding: 0 3%;
+        padding: 0 2%;
         overflow: hidden;
         li {
-          width: 50%;
-          float: left;
-          padding: 10px 0;
-          font-size: 2rem;
+          width: 48%;
+          height: 3rem;
+          line-height: 3rem;
+          float: right;
+          img {
+            padding-top: .7rem;
+            margin-right: .5rem;
+            display: block;
+            float: left;
+          }
           span {
-            font-size: 2rem;
+            font-size: 1.4rem;
           }
         }
       }
@@ -88,7 +98,12 @@
   }
   .weather-list {
     color: $text-color;
-    ul {
+    overflow: hidden;
+    ul#weatherPro {
+      transform: translate(0, 0);
+      transition-property: transform;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-out;
       overflow: hidden;
       li {
         width: 25%;
@@ -97,6 +112,7 @@
         text-align: center;
         font-size: 1.6rem;
         background: $white-color;
+        transform: translate(0, 0);
         &.bg {
           background: $li-color;
         }
