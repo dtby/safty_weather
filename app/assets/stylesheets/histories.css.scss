@@ -42,27 +42,23 @@
   .logo {
     text-align: center;
   }
-  ul {
+  ul.result {
+    padding: 0 2%;
+    margin: 4rem 0 0 0;
     overflow: hidden;
     li {
-      line-height: 40px;
-      &::before {
-        margin-right: 15px;
+      width: 100%;
+      height: 3rem;
+      line-height: 3rem;
+      float: right;
+      img {
+        padding-top: .7rem;
+        margin-right: .5rem;
+        display: block;
+        float: left;
       }
-      &.star::before {
-        content: url("svg/xingxing.svg");
-      }
-      &.time::before {
-        content: url("svg/shizhong.svg");
-      }
-      &.position::before {
-        content: url("svg/dizhi.svg");
-      }
-      &.rain::before {
-        content: url("svg/yu.svg");
-      }
-      &.ok::before {
-        content: url("svg/duihao.svg");
+      span {
+        font-size: 1.4rem;
       }
     }
   }
