@@ -47,7 +47,7 @@
     geolocation.getCurrentPosition(function(r){
       if(this.getStatus() == BMAP_STATUS_SUCCESS){
         gc.getLocation(r.point, function(rs){
-          var sContent = "<div style='color: #eb5405; font-weight: bold;'>您现在的位置是：<br></div>";
+          var sContent = "<div style='color: #eb5405;font-size: 16px;font-weight: bold;'>您现在的位置是：<br></div>";
           var opts = {
             width : 100,     // 信息窗口宽度
             height: 40,     // 信息窗口高度

@@ -61,7 +61,7 @@
       if(this.getStatus() == BMAP_STATUS_SUCCESS){
         gc.getLocation(r.point, function(rs){
           var addComp = rs.addressComponents;
-          var sContent = "<div style='color: #eb5405; font-weight: bold;'>您定位的位置是：<br></div>";
+          var sContent = "<div style='color: #eb5405; font-size: 16px;font-weight: bold;'>您定位的位置是：<br></div>";
           var buttons = "<div style='padding:1rem 0;'>是否确定定位<a href='javascript:void(0);' onclick='searchModal()' id='makeSure' style='background: #6da042; padding: .4rem 1rem; color: #fff;border-radius: .3rem;margin-left:1rem;'>确定</a><a href='javascript:void(0);' onclick='hideinfowindow()' class='callOff' style='background: #fff; padding: .4rem 1rem; color: #eb5405; border:solid 1px #eb5405; margin-left:1rem;border-radius: .3rem;'>取消</a></div>"
           var position = addComp.district + addComp.street + addComp.streetNumber;
           var infoWindow = new BMap.InfoWindow(sContent + position + buttons);
