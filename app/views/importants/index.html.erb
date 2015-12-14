@@ -145,7 +145,9 @@
 </div>
 
 <!-- 模态框 -->
-<div class="modal-bg"></div>
+<div class="modal-bg">
+  <%= link_to image_tag("svg/cuo.svg"), "javascript:void(0);", class: "shutDown"  %>
+</div>
 <div class="modal-content">
   <%= render partial: "get_by_unit", locals: {unit: "上海"} %>
 </div>
@@ -163,11 +165,18 @@
           data: {unit: $(this).attr("alt")}
         })
       });
-
-      $('body').click(function(e){
+      //模态框响应
+      function searchModal(){
+        $(".modal-bg").show(300);
+        $(".modal-content").show(300);
+      }
+      function shutModal() {
         $(".modal-bg").hide();
         $(".modal-content").hide();
-        e.stopPropagation();
+      }
+      //点击x号关闭模态框
+      $('.shutDown').click(function(){
+        shutModal();
       });
     });
   </script>

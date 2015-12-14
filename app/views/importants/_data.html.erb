@@ -72,15 +72,22 @@
       })
     });
 
+    //模态框响应
+    function searchModal(){
+      $(".modal-bg").show(300);
+      $(".modal-content").show(300);
+    }
+    function shutModal() {
+      $(".modal-bg").hide();
+      $(".modal-content").hide();
+    }
+
     //风险防范措施模态框
-    $(".riskBtn").click(function(e){
-      $(".modal-bg").slideDown('fast');
-      $(".modal-content").slideDown('slow');
-      e.stopPropagation();
+    $(".riskBtn").click(function(){
+      searchModal();
     });
-    $('body').click(function(e){
-      $(".modal-bg").slideUp();
-      $(".modal-content").slideUp();
+    $('.shutDown').click(function(e){
+      shutModal();
     });
 
     //风险防范措施按钮宽度等于降水信息宽度
