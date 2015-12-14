@@ -26,10 +26,13 @@ class ImportantsController < ApplicationController
     end
     @points = arr.reject{|x| x['count'] == 0}
     gon.points = @points.to_json
-    # @points = Weather.get_rain_data["data"]
-    # gon.points = @points.to_json
-    #qpf_info = Weather.get_qpf_data(params[:lng], params[:lat])
-    qpf_info = {"code"=>1, "msg"=>"", "data"=>{"start_time"=>"2015-12-02 14:18", "list"=>[{"index"=>0, "d"=>"0.0"}, {"index"=>6, "d"=>"0.0"}, {"index"=>12, "d"=>"0.0"}, {"index"=>18, "d"=>"0.0"}, {"index"=>24, "d"=>"0.0"}, {"index"=>30, "d"=>"0.0"}, {"index"=>36, "d"=>"0.0"}, {"index"=>42, "d"=>"0.0"}, {"index"=>48, "d"=>"0.0"}, {"index"=>54, "d"=>"0.0"}, {"index"=>60, "d"=>"0.0"}, {"index"=>66, "d"=>"0.0"}, {"index"=>72, "d"=>"0.0"}, {"index"=>78, "d"=>"0.0"}, {"index"=>84, "d"=>"0.0"}, {"index"=>90, "d"=>"0.0"}]}}
+
+    #获取时间段内的数据
+    unless params[:lng].present? && params[:lat].present?
+      qpf_info = Weather.get_qpf_data(121.48, 31.22)
+    else
+      qpf_info = Weather.get_qpf_data(params[:lng], params[:lat])
+    end
     @qpf_data = qpf_info["data"]["list"]
   end
 

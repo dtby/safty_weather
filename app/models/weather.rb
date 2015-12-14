@@ -9,7 +9,7 @@ module Weather
   TYPHOONS_URL = "/api/v1/typhoons?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
   LIFE_URL = "/publicdata/data?type=live_index&appid=LV08MwglXetHcxdaUTIR&appkey=3LpFnUP84xhj5HaIcmKGAC2yezMgY9"
   QPF_URL = "/api/v1/qpfs/locate?appid=3z9SIrelF7oKLUbVcPa2&appkey=HYC40csnPN3lMbjf7FiSZIKXTu6AUy"
-  RAIN_URL = "/traffic_api/qpf/006"
+  RAIN_URL = "/traffic_api/qpf/000"
 
   #降水层图数据
   def self.get_rain_data
