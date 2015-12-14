@@ -49,8 +49,34 @@
     var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
     map.addOverlay(marker2);
 
+    //台风级别颜色
+    function selectColor(level) {
+      if(level > 10.8 && level < 17.1){
+        return "#2960af"
+      }else if(level > 17.2 && level < 24.4){
+        return "#fff900"
+      }else if(level > 24.5 && level < 32.6){
+        return "#ff8d00"
+      }else if(level > 32.7 && level < 41.4){
+        return "#ff2600"
+      }else if(level > 41.5 && level < 50.9){
+        return "#b037cd"
+      }else if(level >= 51.0){
+        return "#000000"
+      }
+    }
+
     var points = new Array();
+    var levels = new Array();
     for(var i=0; i < recorders.length; i++) {
+      var level = {
+        max_wind: recorders[i].max_wind,
+        position: {
+          lng: recorders[i].lon,
+          lat: recorders[i].lat
+        }
+      }
+      levels.push(level)
       var pt = new BMap.Point(recorders[i].lon, recorders[i].lat);
       points.push(pt);
     }
@@ -58,9 +84,9 @@
     map.addOverlay(curve); //添加到地图中
 
     //根据台风坐标创建圆形
-    for(var i = 0; i < points.length; i++) {
-      c_point = new BMap.Point(points[i].lng, points[i].lat);
-      var circle = new BMap.Circle(new BMap.Point(points[i].lng, points[i].lat), 20000, {strokeColor: "#666", strokeWeight: 3, strokeOpacity: 0.5});
+    for(var i = 0; i < levels.length; i++) {
+      var circle = new BMap.Circle(new BMap.Point(levels[i].position.lng, levels[i].position.lat), 30000, {strokeColor: selectColor(levels[i].max_wind), strokeWeight: 3, strokeOpacity: 0.5});
+      console.log(selectColor(levels[i].max_wind))
       map.addOverlay(circle);
     }
 
