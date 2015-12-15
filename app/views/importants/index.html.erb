@@ -103,7 +103,7 @@
     <% end %>
     <% jinshan_warnings = Weather.get_area_warning_data("金山")['data'] %>
     <% if jinshan_warnings.present? %>
-      <div class="areaWarning pudong">
+      <div class="areaWarning jinshan">
         <% jinshan_warnings[0..1].each do |data|%>
           <%= image_tag(Weather.get_image_pic(data['type'], data['level']), class: "image") %>
         <% end %>
@@ -142,14 +142,6 @@
       <area shape="rect" coords="20,280,220,520"  nohref="nohref" alt="青浦" />
     </map>
   </div>
-</div>
-
-<!-- 全市区预警模态框 -->
-<div class="modal-bg shanghai">
-  <%= link_to image_tag("svg/cuo.svg"), "javascript:void(0);", class: "shutDown"  %>
-</div>
-<div class="modal-content shanghai">
-  <%= render partial: "get_by_unit", locals: {unit: "上海"} %>
 </div>
 
 <!-- 区县预警模态框 -->

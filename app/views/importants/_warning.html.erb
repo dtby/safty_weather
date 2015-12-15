@@ -1,4 +1,12 @@
 <div class="modal-title">上海市预警信息</div>
 <div class="modal-body">
-      <p>cccc</p>
+  <div class="modalContent">
+    <div class="text-center">
+      <%= image_tag(Weather.get_image_pic(warning_data['type'], warning_data['level'])) %>
+    </div>
+    <div class="text-center">
+      <h3 class="title"><%= warning_data['type'] %>&nbsp;<%= warning_data['level'] %>预警</h3>
+      <p class="content text-left"><%= warning_data['content'] %></p>
+    </div>
+  </div>
 </div>

@@ -1,3 +1,3 @@
-$(".modal-bg.shanghai").slideDown('fast');
-$(".modal-content.shanghai").slideDown('slow');
-$(".modal-content.shanghai").replaceWith($("<%= escape_javascript(render partial: 'warning', locals: {warning_data: @warning_data}) %>"));
+$(".modal-bg").slideDown('fast');
+$(".modal-content").slideDown('slow');
+$(".modal-content").html($("<%= escape_javascript(render partial: 'warning', locals: {warning_data: @warning_data}) %>"));

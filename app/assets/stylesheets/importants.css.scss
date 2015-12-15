@@ -34,6 +34,14 @@
   .modalContent {
     overflow: hidden;
     padding: 1rem;
+    h3.title {
+      padding: .5rem 0;
+      color: $main-color;
+    }
+    p.content {
+      line-height: 1.8rem;
+      text-indent: 3rem;
+    }
   }
   .leftContent {
     width: 30%;
@@ -44,9 +52,10 @@
     float: left;
     h3 {
       padding: 0 0 .5rem 0;
-      color: #000;
+      color: $main-color;
     }
     p {
+      line-height: 1.8rem;
       color: #666;
     }
   }
