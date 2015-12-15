@@ -72,8 +72,6 @@ class ImportantsController < ApplicationController
     @typhoon_recorders = Weather.get_typhoon_data(params[:typhoonid])['data']
     gon.typhoon_recorder = @typhoon_recorder.to_json
     gon.typhoon_recorders = @typhoon_recorders.to_json
-    p "xxxxxxxxxxx"
-    p @typhoon_recorders
     #gon.typhoon_recorder = @typhoon_recorder.to_json
     respond_to do |format|
       format.js
