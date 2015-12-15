@@ -21,7 +21,7 @@
     <% if @warning_data.present? %>
       <% @warning_data[0..2].each do |data|%>
         <section>
-          <%= image_tag(Weather.get_image_pic(data['type'], data['level'])) %>
+          <%= link_to image_tag(Weather.get_image_pic(data['type'], data['level'])), get_warning_importants_path(data: data), remote: true %>
         </section>
       <% end %>
     <% else %>
@@ -144,7 +144,15 @@
   </div>
 </div>
 
-<!-- 模态框 -->
+<!-- 全市区预警模态框 -->
+<div class="modal-bg shanghai">
+  <%= link_to image_tag("svg/cuo.svg"), "javascript:void(0);", class: "shutDown"  %>
+</div>
+<div class="modal-content shanghai">
+  <%= render partial: "get_by_unit", locals: {unit: "上海"} %>
+</div>
+
+<!-- 区县预警模态框 -->
 <div class="modal-bg">
   <%= link_to image_tag("svg/cuo.svg"), "javascript:void(0);", class: "shutDown"  %>
 </div>

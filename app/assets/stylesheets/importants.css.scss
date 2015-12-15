@@ -31,6 +31,25 @@
 //重要天气首页
 .importants_index {
   background: $main-color;
+  .modalContent {
+    overflow: hidden;
+    padding: 1rem;
+  }
+  .leftContent {
+    width: 30%;
+    float: left;
+  }
+  .rightContent {
+    width: 70%;
+    float: left;
+    h3 {
+      padding: 0 0 .5rem 0;
+      color: #000;
+    }
+    p {
+      color: #666;
+    }
+  }
   img {
     width: 100%;
   }
@@ -71,43 +90,43 @@
           width: 27px;
           height: 15px;
         }
-        .chongming {
+        &.chongming {
           left: 55%;
           top: 6%;
         }
-        .shanghai {
+        &.shanghai {
           left: 55%;
           top: 42%;
         }
-        .pudong {
+        &.pudong {
           left: 72%;
           top: 58%;
         }
-        .minhang {
+        &.minhang {
           left: 45%;
           top: 52%;
         }
-        .fengxian {
+        &.fengxian {
           left: 54%;
           top: 79%;
         }
-        .jinshan {
+        &.jinshan {
           left: 31%;
           top: 88%;
         }
-        .songjiang {
+        &.songjiang {
           left: 26%;
           top: 68%;
         }
-        .qingpu {
+        &.qingpu {
           left: 1%;
           top: 61%;
         }
-        .jiading {
+        &.jiading {
           left: 26%;
           top: 20%;
         }
-        .baoshan {
+        &.baoshan {
           left: 42%;
           top: 17%;
         }

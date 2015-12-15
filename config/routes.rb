@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :get_typhoon
       get :get_by_unit
       get :get_rain
+      get :get_warning
     end
   end
   resources :histories, only: :index do

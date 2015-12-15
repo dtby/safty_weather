@@ -15,6 +15,10 @@ class ImportantsController < ApplicationController
     end
   end
 
+  def get_warning
+    @warning_data = params[:data]
+  end
+
   #未来降水
   def future
     mappings = {"lon" => "lng", "lat" => "lat", "data" => "count"}
