@@ -85,8 +85,8 @@
 
     //根据台风坐标创建圆形
     for(var i = 0; i < levels.length; i++) {
-      var circle = new BMap.Circle(new BMap.Point(levels[i].position.lng, levels[i].position.lat), 30000, {strokeColor: selectColor(levels[i].max_wind), strokeWeight: 3, strokeOpacity: 0.5});
-      console.log(selectColor(levels[i].max_wind))
+      var circle = new BMap.Circle(new BMap.Point(levels[i].position.lng, levels[i].position.lat), 30000, {strokeColor: selectColor(levels[i].max_wind), strokeWeight: 3, strokeOpacity: 1});
+      circle.setFillColor(selectColor(levels[i].max_wind))
       map.addOverlay(circle);
     }
 
