@@ -56,16 +56,19 @@ class ImportantsController < ApplicationController
     #显示lastreporttime >= 当前时间减去一天的台风
     @typhoons_data = typhoons_info['data'].reject{|x| x['lastreporttime'] <= Time.now-2.month}
 
-    #单个台风,获取单个台风路径数据列表的第一个，待确认
-    @typhoon_recorder = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data'][0]
+    #单个台风,获取单个台风[路径]数据列表的第一个，待确认
+    @typhoon_recorder = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data'][-1]
+
     @typhoon_recorders = Weather.get_typhoon_data(@typhoons_data[0]['typhoonid'])['data']
     gon.typhoon_recorder = @typhoon_recorder.to_json
     gon.typhoon_recorders = @typhoon_recorders.to_json
   end
 
-  #单个台风
   def get_typhoon
-    @typhoon_recorder = Weather.get_typhoon_data(params[:typhoonid])['data'][0]
+    #单个台风
+    @typhoon_recorder = Weather.get_typhoon_data(params[:typhoonid])['data'][-1]
+
+    #台风列表
     @typhoon_recorders = Weather.get_typhoon_data(params[:typhoonid])['data']
     gon.typhoon_recorder = @typhoon_recorder.to_json
     gon.typhoon_recorders = @typhoon_recorders.to_json

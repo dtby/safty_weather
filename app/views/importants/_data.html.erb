@@ -11,6 +11,8 @@
     <th>十级风圈</th>
     <td><%= typhoon_recorder["ten_radius"] %>km</td>
   </tr>
+  <tr class="dataArray" data-url=<%= typhoon_recorders.to_json %>></tr>
+  <tr class="data" data-url=<%= typhoon_recorder.to_json %>></tr>
 <% else %>
   <tr>
     <th>中心风力</th>
@@ -25,113 +27,118 @@
     <td>暂无数据</td>
   </tr>
 <% end %>
-<div class="dataArray" data-url=<%= typhoon_recorders.to_json %>></div>
-<div class="data" data-url=<%= typhoon_recorder.to_json %>></div>
+
 <% content_for :scripts do %>
   <%= javascript_include_tag baidu_api(ENV['baidukey']), 'data-turbolinks-track' => false %>
   <%= javascript_include_tag "http://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js", 'data-turbolinks-track' => false %>
   <%= javascript_include_tag "http://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js", 'data-turbolinks-track' => false %>
 
   <script type="text/javascript">
-    //初始化地图
-    var recorders = $(".dataArray").data('url');
-    var recorder = $(".data").data('url');
+    function loadTyphoon() {
+      //初始化地图
+      var recorders = $(".dataArray").data('url');
+      var recorder = $(".data").data('url');
 
-    var map = new BMap.Map("allmap");
-    var mapPoint = new BMap.Point(116.2317, 39.5427);
-    map.centerAndZoom(mapPoint, 5);  // 初始化地图,设置中心点坐标和地图级别
-    map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
+      var map = new BMap.Map("allmap");
+      var mapPoint = new BMap.Point(116.2317, 39.5427);
+      map.centerAndZoom(mapPoint, 5);  // 初始化地图,设置中心点坐标和地图级别
+      map.enableScrollWheelZoom();  //开启鼠标滚轮缩放
+      //台风路径画
+      var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
+      var myIcon = new BMap.Icon(image, new BMap.Size(30,30));
+      var point = new BMap.Point(recorder.lon, recorder.lat);
+      var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
+      map.addOverlay(marker2);
 
-    //台风路径画
-    var image = "http://7xj8j2.com1.z0.glb.clouddn.com/iconfont-taifenglujing03.gif"
-    var myIcon = new BMap.Icon(image, new BMap.Size(30,30));
-    var point = new BMap.Point(recorder.lon, recorder.lat);
-    var marker2 = new BMap.Marker(point,{icon:myIcon});  // 创建标注
-    map.addOverlay(marker2);
-
-    //台风级别颜色
-    function selectColor(level) {
-      if(level > 10.8 && level < 17.1){
-        return "#2960af"
-      }else if(level > 17.2 && level < 24.4){
-        return "#fff900"
-      }else if(level > 24.5 && level < 32.6){
-        return "#ff8d00"
-      }else if(level > 32.7 && level < 41.4){
-        return "#ff2600"
-      }else if(level > 41.5 && level < 50.9){
-        return "#b037cd"
-      }else if(level >= 51.0){
-        return "#000000"
-      }
-    }
-
-    var points = new Array();
-    var levels = new Array();
-    for(var i=0; i < recorders.length; i++) {
-      var level = {
-        max_wind: recorders[i].max_wind,
-        position: {
-          lng: recorders[i].lon,
-          lat: recorders[i].lat
+      //台风级别颜色
+      function selectColor(level) {
+        if(level > 10.8 && level < 17.1){
+          return "#2960af"
+        }else if(level > 17.2 && level < 24.4){
+          return "#fff900"
+        }else if(level > 24.5 && level < 32.6){
+          return "#ff8d00"
+        }else if(level > 32.7 && level < 41.4){
+          return "#ff2600"
+        }else if(level > 41.5 && level < 50.9){
+          return "#b037cd"
+        }else if(level >= 51.0){
+          return "#000000"
         }
       }
-      levels.push(level)
-      var pt = new BMap.Point(recorders[i].lon, recorders[i].lat);
-      points.push(pt);
-    }
-    var curve = new BMapLib.CurveLine(points, {strokeColor:"#eb5405", strokeWeight:4, strokeOpacity:0}); //创建弧线对象
-    map.addOverlay(curve); //添加到地图中
 
-    //根据台风坐标创建圆形
-    for(var i = 0; i < levels.length; i++) {
-      var circle = new BMap.Circle(new BMap.Point(levels[i].position.lng, levels[i].position.lat), 30000, {strokeColor: selectColor(levels[i].max_wind), strokeWeight: 3, strokeOpacity: 1});
-      circle.setFillColor(selectColor(levels[i].max_wind))
-      map.addOverlay(circle);
-    }
-
-    $('#typhoonid').change(function(){
-      $.ajax({
-        url: "/importants/get_typhoon",
-        type: 'GET',
-        data: {typhoonid: $(this).val()}
-      })
-    });
-
-    //模态框响应
-    function searchModal(){
-      $(".modal-bg").show(300);
-      $(".modal-content").show(300);
-    }
-    function shutModal() {
-      $(".modal-bg").hide();
-      $(".modal-content").hide();
-    }
-
-    //风险防范措施模态框
-    $(".riskBtn").click(function(){
-      searchModal();
-    });
-    $('.shutDown').click(function(e){
-      shutModal();
-    });
-
-    //风险防范措施按钮宽度等于降水信息宽度
-    var b_width = $(".typhoonInfo").width() + "px";
-    $(".riskBtn").css("width", b_width);
-
-    //台风示意图显示隐藏
-    $(".warning-btn").click(function(e){
-      $(".typhoon-list").slideToggle();
-      if($(this).css("bottom") == "230px") {
-        $(this).animate({"bottom": "60px"});
-      } else {
-        $(this).animate({"bottom": "230px"});
+      var points = new Array();
+      var levels = new Array();
+      for(var i=0; i < recorders.length; i++) {
+        var level = {
+          max_wind: recorders[i].max_wind,
+          position: {
+            lng: recorders[i].lon,
+            lat: recorders[i].lat
+          }
+        }
+        levels.push(level)
+        var pt = new BMap.Point(recorders[i].lon, recorders[i].lat);
+        points.push(pt);
       }
-    })
+      var curve = new BMapLib.CurveLine(points, {strokeColor:"#eb5405", strokeWeight:4, strokeOpacity:0}); //创建弧线对象
+      map.addOverlay(curve); //添加到地图中
 
-    //地图的高度等于屏幕的高度
-    var c_Height=($(document).height() - 111) + "px";
-    $(".mapbar").css("height",c_Height);
+      //根据台风坐标创建圆形
+      for(var i = 0; i < levels.length; i++) {
+        var circle = new BMap.Circle(new BMap.Point(levels[i].position.lng, levels[i].position.lat), 25000, {strokeColor: selectColor(levels[i].max_wind), strokeWeight: 3, strokeOpacity: 1});
+        circle.setFillColor(selectColor(levels[i].max_wind));
+        circle.setFillOpacity(1);
+        map.addOverlay(circle);
+      }
+    }
+    $(function(){
+      loadTyphoon();
+      $('#typhoonid').change(function(){
+        $.ajax({
+          url: "/importants/get_typhoon",
+          type: 'GET',
+          data: {typhoonid: $(this).val()},
+          success: function(){
+            loadTyphoon();
+          }
+        })
+      });
+      //模态框响应
+      function searchModal(){
+        $(".modal-bg").show(300);
+        $(".modal-content").show(300);
+      }
+      function shutModal() {
+        $(".modal-bg").hide();
+        $(".modal-content").hide();
+      }
+
+      //风险防范措施模态框
+      $(".riskBtn").click(function(){
+        searchModal();
+      });
+      $('.shutDown').click(function(e){
+        shutModal();
+      });
+
+      //风险防范措施按钮宽度等于降水信息宽度
+      var b_width = $(".typhoonInfo").width() + "px";
+      $(".riskBtn").css("width", b_width);
+
+      //台风示意图显示隐藏
+      $(".warning-btn").click(function(e){
+        $(".typhoon-list").slideToggle();
+        if($(this).css("bottom") == "230px") {
+          $(this).animate({"bottom": "60px"});
+        } else {
+          $(this).animate({"bottom": "230px"});
+        }
+      })
+
+      //地图的高度等于屏幕的高度
+      var c_Height=($(document).height() - 111) + "px";
+      $(".mapbar").css("height",c_Height);
+    });
   </script>
 <% end %>
