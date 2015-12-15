@@ -15,23 +15,27 @@
   </div>
   <div class="weather-info">
     <ul>
-      <li>
-        <%= image_tag("svg/wind.svg")%>
-        <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
-      </li>
-      <li>
-        <%= image_tag("svg/wendu.svg")%>
-        <span><%= @weather_info_first["tempe"] %></span>
-      </li>
-      <li>
-        <%= image_tag("svg/car.svg")%>
-        <span><%= @life_info %></span>
-      </li>
-      <li>
-        <%= image_tag("svg/leaf.svg")%>
-        <span><%= @aqi_info['aqi']%></span>
-        <span class=<%= aqi_level[@aqi_info['level']]%>><%= @aqi_info['level']%></span>
-      </li>
+      <div class="left">
+        <li>
+          <%= image_tag("svg/wind.svg")%>
+          <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
+        </li>
+        <li>
+          <%= image_tag("svg/wendu.svg")%>
+          <span><%= @weather_info_first["tempe"] %></span>
+        </li>
+      </div>
+      <div class="right">
+        <li>
+          <%= image_tag("svg/car.svg")%>
+          <span><%= @life_info %></span>
+        </li>
+        <li>
+          <%= image_tag("svg/leaf.svg")%>
+          <span><%= @aqi_info['aqi']%></span>
+          <span class=<%= aqi_level[@aqi_info['level']]%>><%= @aqi_info['level']%></span>
+        </li>
+      </div>
     </ul>
   </div>
 </div>
