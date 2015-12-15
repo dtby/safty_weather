@@ -17,12 +17,13 @@
     <ul>
       <div class="left">
         <li>
-          <%= image_tag("svg/wind.svg")%>
-          <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
-        </li>
-        <li>
           <%= image_tag("svg/wendu.svg")%>
           <span><%= @weather_info_first["tempe"] %></span>
+        </li>
+        <li>
+          <%= image_tag("svg/leaf.svg")%>
+          <span><%= @aqi_info['aqi']%></span>
+          <span class=<%= aqi_level[@aqi_info['level']]%>><%= @aqi_info['level']%></span>
         </li>
       </div>
       <div class="right">
@@ -31,9 +32,8 @@
           <span><%= @life_info %></span>
         </li>
         <li>
-          <%= image_tag("svg/leaf.svg")%>
-          <span><%= @aqi_info['aqi']%></span>
-          <span class=<%= aqi_level[@aqi_info['level']]%>><%= @aqi_info['level']%></span>
+          <%= image_tag("svg/wind.svg")%>
+          <span><%= @weather_info_first["direction"] %><%= @weather_info_first["speed"] %></span>
         </li>
       </div>
     </ul>
