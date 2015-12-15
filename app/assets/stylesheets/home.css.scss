@@ -76,13 +76,18 @@
         background: #701419;
       }
       ul {
-        padding: 0 2%;
+        padding: 0 10%;
         overflow: hidden;
+        .left {
+          float: left;
+        }
+        .right {
+          float: right;
+        }
         li {
-          width: 48%;
+          width: 100%;
           height: 3rem;
           line-height: 3rem;
-          float: right;
           img {
             padding-top: .7rem;
             margin-right: .5rem;
