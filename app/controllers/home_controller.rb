@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     @now = Time.now.strftime("%Y-%m-%d")
-    @weather_info_first = Weather.get_weather_data['data']['items'][0]
+    @weather_info_first1 = Weather.get_weather_data['data']['items'][0]
 
     @weather_info = Weather.get_weather_data['data']['items'][1..-2]  #页面需要，显示未来八天的天气
     gon.weather_info = @weather_info

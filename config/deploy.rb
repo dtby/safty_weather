@@ -16,6 +16,7 @@ set :deploy_to, '/home/deploy/safty_weather'
 # Default value for :scm is :git
 set :scm, :git
 set :unicorn_config, "#{ fetch(:deploy_to) }current/config/unicorn.rb"
+set :unicorn_pid, '/home/deploy/safty_weather/shared/tmp/pids/unicorn.pid'
 
 set :rails_env, 'production'
 set :assets_roles, [:web, :app]
