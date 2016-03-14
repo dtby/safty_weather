@@ -11,7 +11,7 @@ listen "/tmp/unicorn.safty_weather.sock", :backlog => 64
 timeout 30
 
 # App PID
-pid "/home/deploy/tmp/pids/unicorn.pid"
+pid "/home/deploy/safty_weather/shared/tmp/pids/unicorn.pid"
 
 # By default, the Unicorn logger will write to stderr.
 # Additionally, some applications/frameworks log to stderr or stdout,
