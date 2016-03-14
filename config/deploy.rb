@@ -8,7 +8,7 @@ set :scm, :git
 set :repo_url, 'https://github.com/dtby/safty_weather'
 
 # Default branch is :master
-set :branch, 'master'
+set :branch, 'develop'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, '/home/deploy/safty_weather'
@@ -37,3 +37,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+namespace :deploy do
+  task :restart do
+    invoke 'unicorn:reload'
+  end
+end

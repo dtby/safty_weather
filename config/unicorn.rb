@@ -47,11 +47,3 @@ before_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
 end
-
-after_fork do |server, worker|
-  # 禁止GC，配合后续的OOB，来减少请求的执行时间
-  GC.disable
-  # the following is *required* for Rails + "preload_app true",
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.establish_connection
-end
